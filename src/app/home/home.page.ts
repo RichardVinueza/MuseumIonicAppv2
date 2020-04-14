@@ -42,16 +42,16 @@ export class HomePage {
   }
 
   changeTypeFile(event) {
-    let fileChoice: [string] = event.detail.value;
+    let fileChoice: [String] = event.detail.value;
     if (fileChoice == []) {
-      this.typeFileChoices = ["image"];
+      this.typeFileChoices = ["image"]
       this.artArrayShow = this.artArray;
     } else {
-      this.loadArtworkShow(fileChoice);
+      this.loadArtWorkShow(fileChoice);
     }
   }
 
-  loadArtworkShow(fileChoice: [string]) {
+  loadArtWorkShow(fileChoice: [String]) {
     this.artArrayShow = new Array<Artworks>();
     for (let art of this.artArray) {
       let mediaShow = false;

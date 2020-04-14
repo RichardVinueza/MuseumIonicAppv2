@@ -29,3 +29,27 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+
+.exhibition{
+  align-items:center;
+
+  margin: 40px 15px 40px;
+}
+
+.titles{
+  align-items:center;
+  margin: 20px 15px 0px;
+  font-size: 4vw;
+  font-weight:bold;
+}
+
+.descrip{
+  font-size: 4vw;
+}
+
+.artworks{
+  align-items: center;
+  margin: 0px 0px 0px 15px;
+  font-size: 4vw;
+  font-weight: bold;
+}

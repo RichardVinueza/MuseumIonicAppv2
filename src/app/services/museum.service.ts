@@ -17,10 +17,10 @@ export class Artworks {
   name: string;
   author: string;
   country: string;
-  media: [MediApi];
+  media: [MediaApi];
 }
 
-export class MediApi {
+export class MediaApi {
   id: number;
   displayName: string;
   fileName: string;
@@ -31,7 +31,7 @@ export class MediApi {
 export class Beacons {
   id: number;
   mac: string;
-  arworkId: number;
+  artworkId: number;
 }
 
 @Injectable({

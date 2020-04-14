@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http'
 
-export const localhost = "http://192.168.0.16:8080";
+export const localhost = "http://192.168.0.1:8080";
 
 export class Exhibitions {
   id: number;
@@ -45,15 +45,15 @@ export class MuseumService {
     return this.http.get(localhost + "/exhibitions");
   }
 
-  getArtworksFromBackEnd(){
+  getArtworksFromBackEnd() {
     return this.http.get(localhost + "/artworks");
   }
 
-  getMediaFromBackEnd(){
-    return this.http.get(localhost + "/media");
+  getMediaFromBackEnd() {
+    return this.http.get(localhost + "/medias");
   }
 
-  getBeaconsFromBackEnd(){
+  getBeaconsFromBackEnd() {
     return this.http.get(localhost + "/beacons");
   }
 }

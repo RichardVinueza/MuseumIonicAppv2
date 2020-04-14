@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { MuseumService, Exhibitions, Artworks, ipAddress } from '../services/museum.service';
+import { MuseumService, Exhibitions, Artworks, ipAddress, Beacons } from '../services/museum.service';
 import { VirtualTimeScheduler } from 'rxjs';
+import { BLE } from '@ionic-native/ble/ngx';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,11 @@ import { VirtualTimeScheduler } from 'rxjs';
 export class HomePage {
 
   ipAddress = ipAddress;
+
+  devices: any[] = [];
+  beaconArray: Array<Beacons> = [];
+  auxDevice: any;
+  beacon: Beacons;
 
   exhibitArray: Array<Exhibitions> = [];
   exhibit: Exhibitions;
@@ -22,12 +28,37 @@ export class HomePage {
   typeFileChoices: [String];
 
   constructor(
-    private apiMuseum: MuseumService
+    private apiMuseum: MuseumService,
+    private ble: BLE
   ) { }
 
   ionViewDidEnter() {
+    this.getBeacons();
     this.getExhibitions();
-    this.getArtworks();
+    this.scanForBeacons();
+  }
+
+  getBeacons() {
+    this.apiMuseum.getBeaconsFromBackEnd().subscribe((res: Array<Beacons>) => {
+      this.beaconArray = res;
+    })
+  }
+
+  scanForBeacons() {
+    console.log("SCAN...");
+    this.ble.startScan([]).subscribe(device => {
+      if (device.name) {
+        console.log(JSON.stringify(device));
+      }
+      for (this.beacon of this.beaconArray) {
+        if (this.beacon.mac == device.id) {
+          console.log("IDs MATCH");
+          document.getElementById("load-exhibit").style.display = "block";
+          this.getArtworks();
+        }
+      }
+    })
+    console.log("BEACON FOUND");
   }
 
   getExhibitions() {

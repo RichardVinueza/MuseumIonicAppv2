@@ -12,7 +12,7 @@
   <h1 class="titles">DESCRIPTION</h1>
   <div *ngFor="let exhibit of exhibitArray">
     <div *ngIf="exhibit.location == 'Area 1'">
-      <ion-list id="load-exhibit" lines="none" style="display:block">
+      <ion-list id="load-exhibit" lines="none" style="display:none">
         <ion-item class="descrip">
           <ion-label>Name: {{exhibit.name}}</ion-label>
         </ion-item>
@@ -49,4 +49,5 @@
       </ion-img>
     </ng-container>
   </ion-list>
+  <!-- <ion-button (click)=" scanForBeacon()">SCAN BEACONS</ion-button> -->
 </ion-content>

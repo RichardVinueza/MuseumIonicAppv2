@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MuseumService, localhost, Exhibitions, Artworks } from '../services/museum.service';
+import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -32,12 +33,14 @@ export class HomePage {
   getExhibitions() {
     this.apiMuseum.getExhibitionsFromBackEnd().subscribe((res: Array<Exhibitions>) => {
       this.exhibitArray = res;
+      console.log("GetExhibitions: " + this.exhibitArray);
     })
   }
 
   getArtworks() {
     this.apiMuseum.getArtworksFromBackEnd().subscribe((res: Array<Artworks>) => {
       this.artArray = res;
+      console.log("GetArtworks: " + this.artArray);
     })
   }
 

@@ -12,17 +12,17 @@
   <h1 class="titles">DESCRIPTION</h1>
   <div *ngFor="let exhibit of exhibitArray">
     <div *ngIf="exhibit.location == 'Area 1'">
-      <ion-list id="load-exhibit" lines="none" style="display:none">
+      <ion-list id="load-exhibit" lines="none" style="display:block">
         <ion-item class="descrip">
           <ion-label>Name: {{exhibit.name}}</ion-label>
         </ion-item>
         <ion-item class="descrip">
           <ion-label>Opening Date: {{exhibit.openingDate}}</ion-label>
         </ion-item>
-        <ion-item>
+        <ion-item class="descrip">
           <ion-label>Closing Date: {{exhibit.closingDate}}</ion-label>
         </ion-item>
-        <ion-item>
+        <ion-item class="descrip">
           <ion-label>Location: {{exhibit.location}}</ion-label>
         </ion-item>
       </ion-list>

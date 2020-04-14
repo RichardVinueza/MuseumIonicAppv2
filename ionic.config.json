@@ -1,5 +1,7 @@
 {
   "name": "MuseumIonicApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

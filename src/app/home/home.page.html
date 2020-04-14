@@ -45,7 +45,7 @@
     <h1 class="artworks">{{art.name}}</h1>
     <ng-container *ngFor="let media of art.media">
       <ion-img *ngIf="media.fileType == 'image' && typeFileChoices.includes(media.fileType)" style="display:block"
-        class="exhibition" [src]="localhost + '/img/' + media.fileName + '.' + media.extension" alt="img">
+        class="exhibition" [src]="ipAddress + '/img/' + media.fileName + '.' + media.extension" alt="img">
       </ion-img>
     </ng-container>
   </ion-list>

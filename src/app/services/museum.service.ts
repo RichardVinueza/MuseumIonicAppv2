@@ -46,7 +46,7 @@ export class MuseumService {
   }
 
   getArtworksFromBackEnd(){
-    return this.http.get(localhost + "artworks");
+    return this.http.get(localhost + "/artworks");
   }
 
   getMediaFromBackEnd(){

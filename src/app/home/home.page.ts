@@ -19,7 +19,7 @@ export class HomePage {
   art: Artworks;
   imgArtwork: any;
 
-  typeFileChoices: [string];
+  typeFileChoices: [String];
 
   constructor(
     private apiMuseum: MuseumService

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MuseumService, localhost, Exhibitions, Artworks } from '../services/museum.service';
+import { MuseumService, Exhibitions, Artworks, localhost } from '../services/museum.service';
 import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
@@ -9,7 +9,7 @@ import { VirtualTimeScheduler } from 'rxjs';
 })
 export class HomePage {
 
-  locahost = localhost;
+  localhost = localhost;
 
   exhibitArray: Array<Exhibitions> = [];
   exhibit: Exhibitions;

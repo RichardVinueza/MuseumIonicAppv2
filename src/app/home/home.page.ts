@@ -41,6 +41,7 @@ export class HomePage {
   getBeacons() {
     this.apiMuseum.getBeaconsFromBackEnd().subscribe((res: Array<Beacons>) => {
       this.beaconArray = res;
+      console.log("GetBeacons: " + this.beaconArray);
     })
   }
 

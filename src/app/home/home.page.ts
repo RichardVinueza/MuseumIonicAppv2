@@ -79,7 +79,7 @@ export class HomePage {
   changeTypeFile(event) {
     let fileChoice: [String] = event.detail.value;
     if (fileChoice == []) {
-      this.typeFileChoices = ["image"]
+      this.typeFileChoices = ["image"];
       this.artArrayShow = this.artArray;
     } else {
       this.loadArtWorkShow(fileChoice);

@@ -49,8 +49,13 @@
       </ion-img>
       <ng-container *ngIf="media.fileType == 'audio' && typeFileChoices.includes(media.fileType)" style="display:block">
         <audio controls>  
-          <source class="exhibition" [src]="ipAddress + '/audio/' + media.fileName + '.' + media.extension" alt="audio">   
+          <source class="exhibition" [src]="ipAddress + '/audio/' + media.fileName + '.' + media.extension" type="audio/mpeg" alt="audio">   
         </audio>
+      </ng-container>
+      <ng-container *ngIf="media.fileType == 'video' && typeFileChoices.includes(media.fileType)" style="display:block">
+        <video controls>  
+          <source class="exhibition" [src]="ipAddress + '/video/' + media.fileName + '.' + media.extension" alt="audio">   
+        </video>
       </ng-container>
     </ng-container>
   </ion-list>

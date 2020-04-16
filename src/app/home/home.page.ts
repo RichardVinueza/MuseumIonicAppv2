@@ -81,6 +81,7 @@ export class HomePage {
     if (fileChoice == []) {
       this.typeFileChoices = ["image"];
       this.typeFileChoices = ["audio"];
+      this.typeFileChoices = ["video"];
       this.artArrayShow = this.artArray;
     } else {
       this.loadArtWorkShow(fileChoice);

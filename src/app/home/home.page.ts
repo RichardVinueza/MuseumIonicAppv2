@@ -80,6 +80,7 @@ export class HomePage {
     let fileChoice: [String] = event.detail.value;
     if (fileChoice == []) {
       this.typeFileChoices = ["image"];
+      this.typeFileChoices = ["audio"];
       this.artArrayShow = this.artArray;
     } else {
       this.loadArtWorkShow(fileChoice);

@@ -41,6 +41,7 @@ export class HomePage {
   getBeacons() {
     this.apiMuseum.getBeaconsFromBackEnd().subscribe((res: Array<Beacons>) => {
       this.beaconArray = res;
+      console.log("GetBeacons: " + this.beaconArray);
     })
   }
 
@@ -78,7 +79,9 @@ export class HomePage {
   changeTypeFile(event) {
     let fileChoice: [String] = event.detail.value;
     if (fileChoice == []) {
-      this.typeFileChoices = ["image"]
+      this.typeFileChoices = ["image"];
+      this.typeFileChoices = ["audio"];
+      this.typeFileChoices = ["video"];
       this.artArrayShow = this.artArray;
     } else {
       this.loadArtWorkShow(fileChoice);

@@ -32,15 +32,33 @@ ion-content ion-toolbar {
 
 .exhibition{
   align-items:center;
-
+  size: 200px 200px;
   margin: 40px 15px 40px;
 }
 
 .media{
   align-items:center;
-  max-width: 200px;
-  margin: 40px 15px 40px;
+  max-width: 90vw;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
+
+// .media-audio{
+//   align-items:center;
+//   margin: 0 auto;
+//   max-width: 90vw;
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+// }
+
+// .media-video{
+//   align-items:center;
+//   max-width: 90vw;
+//   margin: 0 auto;
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+// }
 
 .titles{
   align-items:center;
@@ -55,7 +73,7 @@ ion-content ion-toolbar {
 
 .artworks{
   align-items: center;
-  margin: 0px 0px 0px 15px;
+  margin: 5vw 0vw 0vw 38vw;
   font-size: 4vw;
   font-weight: bold;
 }

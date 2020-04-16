@@ -45,16 +45,17 @@
     <h1 class="artworks">{{art.name}}</h1>
     <ng-container *ngFor="let media of art.media">
       <ion-img *ngIf="media.fileType == 'image' && typeFileChoices.includes(media.fileType)" style="display:block"
-        class="exhibition" [src]="ipAddress + '/img/' + media.fileName + '.' + media.extension" alt="img">
+        class="media" [src]="ipAddress + '/img/' + media.fileName + '.' + media.extension" alt="img">
       </ion-img>
       <ng-container *ngIf="media.fileType == 'audio' && typeFileChoices.includes(media.fileType)" style="display:block">
-        <audio controls>  
-          <source class="exhibition" [src]="ipAddress + '/audio/' + media.fileName + '.' + media.extension" type="audio/mpeg" alt="audio">   
+        <audio class="media" controls>
+          <source  [src]="ipAddress + '/audio/' + media.fileName + '.' + media.extension"
+            type="audio/mpeg" alt="audio">
         </audio>
       </ng-container>
       <ng-container *ngIf="media.fileType == 'video' && typeFileChoices.includes(media.fileType)" style="display:block">
-        <video controls>  
-          <source class="exhibition" [src]="ipAddress + '/video/' + media.fileName + '.' + media.extension" alt="audio">   
+        <video controls>
+          <source class="media" [src]="ipAddress + '/video/' + media.fileName + '.' + media.extension" alt="audio">
         </video>
       </ng-container>
     </ng-container>
@@ -75,6 +76,6 @@
       </ng-container>
     </ng-container>
   </ion-list> -->
-  
+
   <!-- <ion-button (click)=" scanForBeacon()">SCAN BEACONS</ion-button> -->
 </ion-content>

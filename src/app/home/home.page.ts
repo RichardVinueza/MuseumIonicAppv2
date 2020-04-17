@@ -42,6 +42,11 @@ export class HomePage {
   isEnabled() {
     this.ble.startStateNotifications().subscribe(state => {
       console.log("Bluetooth is " + state);
+      if(state == 'on'){
+        document.getElementById("show-content").style.display = "block";
+      }else{
+        document.getElementById("show-content").style.display = "none";
+      }
     });
   }
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MuseumService, Exhibitions, Artworks, ipAddress, Beacons } from '../services/museum.service';
-import { VirtualTimeScheduler } from 'rxjs';
 import { BLE } from '@ionic-native/ble/ngx';
 
 @Component({

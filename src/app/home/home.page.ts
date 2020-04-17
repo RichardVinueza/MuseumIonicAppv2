@@ -65,7 +65,7 @@ export class HomePage {
           this.getArtworks();
         }
       }
-    })
+    });
     console.log("BEACON FOUND");
   }
 

@@ -33,9 +33,7 @@ export class HomePage {
   ) { }
 
   ionViewWillEnter() {
-    this.getBeacons();
     this.getExhibitions();
-    this.scanForBeacons();
     this.isEnabled();
   }
 
@@ -43,9 +41,10 @@ export class HomePage {
     this.ble.startStateNotifications().subscribe(state => {
       console.log("Bluetooth is " + state);
       if(state == 'on'){
-        document.getElementById("show-content").style.display = "block";
+        this.getBeacons();
+        this.scanForBeacons();
       }else{
-        document.getElementById("show-content").style.display = "none";
+        this.ble.stopScan();
       }
     });
   }

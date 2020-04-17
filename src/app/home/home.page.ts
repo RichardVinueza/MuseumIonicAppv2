@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MuseumService, Exhibitions, Artworks, ipAddress, Beacons } from '../services/museum.service';
 import { BLE } from '@ionic-native/ble/ngx';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -28,13 +29,16 @@ export class HomePage {
 
   constructor(
     private apiMuseum: MuseumService,
-    private ble: BLE
+    private ble: BLE,
+    public alertController: AlertController
   ) { }
 
   ionViewWillEnter() {
     this.getExhibitions();
     this.isEnabled();
   }
+
+  
 
   isEnabled() {
     this.ble.startStateNotifications().subscribe(state => {
@@ -43,9 +47,20 @@ export class HomePage {
         this.getBeacons();
         this.scanForBeacons();
       }else{
-        this.ble.stopScan();
+        this.presentAlert();
       }
     });
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'BLUETOOTH',
+      message: 'Please, turn on Bluetooth to use App',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
   getBeacons() {

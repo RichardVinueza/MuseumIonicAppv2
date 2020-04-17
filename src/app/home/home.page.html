@@ -6,12 +6,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="load-page" class="padding" [fullscreen]="true">
+<ion-content id="show-content" style="display: block" class="padding" [fullscreen]="true">
   <h1 class="titles">Exhibitions</h1>
   <ion-img class="exhibition" src="http://192.168.0.16:8080/img/icon.png"></ion-img>
   <h1 class="titles">DESCRIPTION</h1>
-  <div *ngFor="let exhibit of exhibitArray">
-    <div *ngIf="exhibit.location == 'Area 1'">
+  <ng-container *ngFor="let exhibit of exhibitArray">
+    <ng-container *ngIf="exhibit.location == 'Area 1'">
       <ion-list id="load-exhibit" lines="none" style="display:none">
         <ion-item class="descrip">
           <ion-label>Name: {{exhibit.name}}</ion-label>
@@ -26,8 +26,8 @@
           <ion-label>Location: {{exhibit.location}}</ion-label>
         </ion-item>
       </ion-list>
-    </div>
-  </div>
+    </ng-container>
+  </ng-container>
   <h1 class="titles">ARTWORKS</h1>
   <ion-list>
     <ion-item>

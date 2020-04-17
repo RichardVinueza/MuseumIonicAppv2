@@ -32,10 +32,17 @@ export class HomePage {
     private ble: BLE
   ) { }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     this.getBeacons();
     this.getExhibitions();
     this.scanForBeacons();
+    this.isEnabled();
+  }
+
+  isEnabled() {
+    this.ble.startStateNotifications().subscribe(state => {
+      console.log("Bluetooth is " + state);
+    });
   }
 
   getBeacons() {

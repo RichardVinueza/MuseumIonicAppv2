@@ -38,15 +38,15 @@ export class HomePage {
     this.isEnabled();
   }
 
-  
+
 
   isEnabled() {
     this.ble.startStateNotifications().subscribe(state => {
       console.log("Bluetooth is " + state);
-      if(state == 'on'){
+      if (state == 'on') {
         this.getBeacons();
         this.scanForBeacons();
-      }else{
+      } else if (state == 'off') {
         this.presentAlert();
       }
     });

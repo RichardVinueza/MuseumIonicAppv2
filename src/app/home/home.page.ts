@@ -33,7 +33,7 @@ export class HomePage {
     public alertController: AlertController
   ) { }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.getExhibitions();
     this.isEnabled();
   }
@@ -47,6 +47,7 @@ export class HomePage {
         this.getBeacons();
         this.scanForBeacons();
       } else if (state == 'off') {
+        
         this.presentAlert();
       }
     });

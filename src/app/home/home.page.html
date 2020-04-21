@@ -29,10 +29,10 @@
     </ng-container>
   </ng-container> 
   <h1 class="titles">ARTWORKS</h1>
-  <ion-list class="type-file">
+  <ion-list>
     <ion-item class="type-file">
-      <ion-label class="type-file">TYPE FILE</ion-label>
-      <ion-select class="type-file" (ionChange)="changeTypeFile($event)" [(ngModel)]="typeFileChoices" multiple="true" cancelText="Cancel"
+      <ion-label>TYPE FILE</ion-label>
+      <ion-select (ionChange)="changeTypeFile($event)" [(ngModel)]="typeFileChoices" multiple="true" cancelText="Cancel"
         okText="Confirm">
         <ion-select-option value="image">Image</ion-select-option>
         <ion-select-option value="audio">Audio</ion-select-option>

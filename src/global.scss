@@ -27,16 +27,15 @@
 
 ion-header{
     --ion-background-color:#59D9F7;
-    border-style: groove;
 }
 
 ion-title{
     color: black;
     text-align: center;
-    font-family: cursive;
-    font-weight: 900;
+    font-family: normal;
+    font-style: oblique;
 }
 
-ion-content{
-    // --ion-background-color:hsl(0, 0%, 94%);
-}
+// ion-content{
+//     // --ion-background-color:hsl(0, 0%, 94%);
+// }

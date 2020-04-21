@@ -32,7 +32,8 @@ ion-content ion-toolbar {
 
 .exhibition{
   align-items:center;
-  size: 200px 200px;
+  max-width: 50vw;
+  max-height: 50vw;
   margin: 40px 15px 40px;
 }
 

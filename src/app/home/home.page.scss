@@ -39,7 +39,7 @@ ion-content ion-toolbar {
 
 .media{
   align-items:center;
-  max-width: 90vw;
+  max-width: 18.75em;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -49,21 +49,21 @@ ion-content ion-toolbar {
 .titles{
   align-items:center;
   margin: 20px 15px 0px; 
-  font-size: 4vw;
+  font-size: 1em;
   font-weight:bold;
   font-style: normal;
   border-bottom: 3px solid #59D9F7;
 }
 
 .descrip{
-  font-size: 4vw;
+  font-size: 1em;
 }
 
 .artworks{
   text-align: center;
   // align-items: center;
   // margin: 5vw 0vw 0vw 38vw;
-  font-size: 4vw;
+  font-size: 1em;
   font-weight: bold;
 }
 

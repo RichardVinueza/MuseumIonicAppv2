@@ -43,6 +43,11 @@ ion-content ion-toolbar {
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
+  opacity: 0.3;
+}
+
+.media:hover{
+  opacity: 1.0;
 }
 
 
@@ -63,10 +68,6 @@ ion-content ion-toolbar {
   color: #59D9F7;
 }
 
-.type-file ion-label:first-child{
-  color: #59D9F7;
-}
-
 .artworks{
   text-align: center;
   // align-items: center;
@@ -84,4 +85,8 @@ ion-content ion-toolbar {
   border-left: 6px solid #59D9F7;
   // background-color: lightgrey;
   border-radius: 5px;
+}
+
+.type-file ion-label:first-child{
+  color: #59D9F7;
 }

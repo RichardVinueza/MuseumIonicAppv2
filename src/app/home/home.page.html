@@ -53,7 +53,7 @@
       </audio>
       <video *ngIf="media.fileType == 'video' && typeFileChoices.includes(media.fileType)" style="display:block"
         class="media" controls>
-        <source [src]="ipAddress + '/video/' + media.fileName + '.' + media.extension" alt="audio">
+        <source [src]="ipAddress + '/video/' + media.fileName + '.' + media.extension" alt="video">
       </video>
     </ng-container>
   </ion-list>

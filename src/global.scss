@@ -28,18 +28,41 @@
 //La cabecera color azul casi turquesa
 ion-header{
     --ion-background-color:#59D9F7;
+    
 }
 
 //Cambio de fuente, letra tipo negrilla y un espacio entre cada una de las letras
 ion-title{
-    color: black;
+
+    position: absolute;
     text-align: center;
-    font-family: fantasy;
-    font-style: normal;
+    left: 110px;
+    top: 15px;
     font-weight: bold;
-    letter-spacing: 3px;
+    font-style: normal;
+    letter-spacing: 2px;
+    color: white;
+    // border-style: solid;
+    // border-color: rgb(242, 255, 0);
 }
 
-// ion-content{
-//     --ion-background-color: lightblue;
-// }
+ion-fab{
+    max-width: 50%;
+    float: right;
+    // border-style: solid;
+    // border-color: rgb(242, 255, 0);
+    position: relative;
+    right: 20px;
+}
+
+ion-fab-button{
+    width: 40px;
+    height: 40px;
+    // border-style: solid;
+    // border-color: red;
+}
+
+ion-icon{
+    width: 15px;
+    height: 15px;
+}

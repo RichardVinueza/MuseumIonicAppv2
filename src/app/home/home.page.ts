@@ -16,6 +16,7 @@ export class HomePage {
   beaconArray: Array<Beacons> = [];
   auxDevice: any;
   beacon: Beacons;
+  bluetoothState: string;
 
   exhibitArray: Array<Exhibitions> = [];
   exhibit: Exhibitions;
@@ -33,24 +34,27 @@ export class HomePage {
     public alertController: AlertController
   ) { }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.getExhibitions();
+    this.getBeacons();
     this.isEnabled();
   }
 
-  
+
 
   isEnabled() {
     this.ble.startStateNotifications().subscribe(state => {
       console.log("Bluetooth is " + state);
-      if(state == 'on'){
-        this.getBeacons();
+      this.bluetoothState = state;
+      if (this.bluetoothState == 'on') { 
         this.scanForBeacons();
-      }else{
+
+      } else if (this.bluetoothState == 'off') {
         this.presentAlert();
       }
     });
   }
+
 
   async presentAlert() {
     const alert = await this.alertController.create({

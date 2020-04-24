@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Museum
+      MUSEUM
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="show-content" style="display: block" class="padding" [fullscreen]="true">
-  <h1 class="titles">Exhibitions</h1>
+<ion-content style="display: block" class="padding" [fullscreen]="true">
+  <h1 class="titles">EXHIBITIONS</h1>
   <ion-img class="exhibition" src="http://192.168.0.16:8080/img/icon.png"></ion-img>
   <h1 class="titles">DESCRIPTION</h1>
   <ng-container *ngFor="let exhibit of exhibitArray">
@@ -27,10 +27,10 @@
         </ion-item>
       </ion-list>
     </ng-container>
-  </ng-container>
+  </ng-container> 
   <h1 class="titles">ARTWORKS</h1>
   <ion-list>
-    <ion-item>
+    <ion-item class="type-file">
       <ion-label>TYPE FILE</ion-label>
       <ion-select (ionChange)="changeTypeFile($event)" [(ngModel)]="typeFileChoices" multiple="true" cancelText="Cancel"
         okText="Confirm">
@@ -53,7 +53,7 @@
       </audio>
       <video *ngIf="media.fileType == 'video' && typeFileChoices.includes(media.fileType)" style="display:block"
         class="media" controls>
-        <source [src]="ipAddress + '/video/' + media.fileName + '.' + media.extension" alt="audio">
+        <source [src]="ipAddress + '/video/' + media.fileName + '.' + media.extension" alt="video">
       </video>
     </ng-container>
   </ion-list>

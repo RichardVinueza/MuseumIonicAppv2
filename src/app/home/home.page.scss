@@ -1,80 +1,76 @@
-#container {
-  text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-
-ion-content ion-toolbar {
-  --background: translucent;
-}
-
+//Centrar imagen respecto a los margenes y adaptar su tamaño.
 .exhibition{
   align-items:center;
-  size: 200px 200px;
+  max-width: 50vw;
+  max-height: 50vw;
   margin: 40px 15px 40px;
 }
 
+//Centrar media(imagenes,audios,video) horizontalmente, darles un tamaño máximo y una separación entre otros elementos.
 .media{
   align-items:center;
-  max-width: 90vw;
+  max-width: 18.75em;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
+  opacity: 0.3;
 }
 
-// .media-audio{
-//   align-items:center;
-//   margin: 0 auto;
-//   max-width: 90vw;
-//   margin-top: 10px;
-//   margin-bottom: 10px;
-// }
+.media:hover{
+  opacity: 1.0;
+}
 
-// .media-video{
-//   align-items:center;
-//   max-width: 90vw;
-//   margin: 0 auto;
-//   margin-top: 10px;
-//   margin-bottom: 10px;
-// }
-
+//Centrar los titulos horizontalmente con respecto a los margenes.
+//Aplicar una fuente,peso y estilo de letra.
+//Subrayar el texto para crear efecto de separación entre bloques.
 .titles{
   align-items:center;
-  margin: 20px 15px 0px;
-  font-size: 4vw;
+  margin: 20px 15px 0px; 
+  font-size: 1em;
   font-weight:bold;
+  font-style: normal;
+  border-bottom: 3px solid #59D9F7;
 }
 
+//Aplicar un tamaño al texto que se mantiene aunque se gire el dispositivo.
 .descrip{
-  font-size: 4vw;
+  font-size: 1em;
 }
 
+.descrip:hover{
+  color: #59D9F7;
+}
+
+//La lista de elementos en la descripción solo ocupan un 72% del espacio horizontal.
+#load-exhibit{
+  max-width: 72%;
+}
+
+//El título de la obra se centra horizontalmente con un tamaño y peso determinado.
+//Su tamaño se mantiene aunque se gire la pantalla.
 .artworks{
   text-align: center;
   // align-items: center;
   // margin: 5vw 0vw 0vw 38vw;
-  font-size: 4vw;
+  font-size: 1em;
   font-weight: bold;
+}
+
+//Al botón que nos permite alegir media(imagen,audio,vídeo) se centra horizontalmente con respecto a los margenes.
+//Decorar su borde izquierdo aplicando estilos de borde redondo y color.
+.type-file{
+  align-items:center;
+  margin: 20px 15px 0px; 
+  margin-top: 10px;
+  margin-bottom: 10px;
+  // border-style: groove;
+  border-left: 6px solid #59D9F7;
+  // background-color: lightgrey;
+  border-radius: 5px;
+}
+
+//El pirmer ion-label después de class="type-file" tendrá el color #59D9F7.
+.type-file ion-label:first-child{
+  color: #59D9F7;
 }

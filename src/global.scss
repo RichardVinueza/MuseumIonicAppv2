@@ -33,11 +33,11 @@ ion-header{
 
 //Cambio de fuente, letra tipo negrilla y un espacio entre cada una de las letras
 ion-title{
-
-    position: absolute;
     text-align: center;
-    left: 110px;
-    top: 15px;
+    width: min-content;
+    margin:auto;
+    position: relative;
+    top: 20px;
     font-weight: bold;
     font-style: normal;
     letter-spacing: 2px;
@@ -47,17 +47,23 @@ ion-title{
 }
 
 ion-fab{
-    max-width: 50%;
+    margin: auto;
     float: right;
-    // border-style: solid;
-    // border-color: rgb(242, 255, 0);
     position: relative;
     right: 20px;
+    bottom: 13px;
+    --color: secondary;
+    // border-style: solid;
+    // border-color: rgb(242, 255, 0);
 }
+  
+   
 
 ion-fab-button{
     width: 40px;
     height: 40px;
+    --color:black;
+    --background:white;
     // border-style: solid;
     // border-color: red;
 }
@@ -65,4 +71,9 @@ ion-fab-button{
 ion-icon{
     width: 15px;
     height: 15px;
+}
+
+ion-badge{
+    background: none;
+    color: black;
 }

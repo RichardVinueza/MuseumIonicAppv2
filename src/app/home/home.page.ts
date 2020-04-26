@@ -40,7 +40,6 @@ export class HomePage {
     this.getExhibitions();
     this.getBeacons();
     this.isEnabled();
-    this.BadgeDeviceReady();
   }
 
 
@@ -75,13 +74,6 @@ export class HomePage {
       this.beaconArray = res;
       console.log("GetBeacons: " + this.beaconArray);
     })
-  }
-
-  //El plugin es accesible una vez el dispostivo este en funcionamiento
-  BadgeDeviceReady() {
-    document.addEventListener('deviceready', function () {
-      // cordova.plugins.notification.badge is now available
-    }, false);
   }
 
   scanForBeacons() {

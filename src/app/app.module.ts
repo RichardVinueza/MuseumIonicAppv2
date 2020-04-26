@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BLE } from '@ionic-native/ble/ngx';
+import { Badge } from '@ionic-native/badge/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,6 +25,7 @@ import { BLE } from '@ionic-native/ble/ngx';
     StatusBar,
     SplashScreen,
     BLE,
+    Badge,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

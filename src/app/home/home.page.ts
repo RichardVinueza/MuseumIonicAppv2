@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MuseumService, Exhibitions, Artworks, ipAddress, Beacons } from '../services/museum.service';
 import { BLE } from '@ionic-native/ble/ngx';
 import { AlertController } from '@ionic/angular';
+import { Badge } from '@ionic-native/badge/ngx';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +33,7 @@ export class HomePage {
     private apiMuseum: MuseumService,
     private ble: BLE,
     public alertController: AlertController,
+    private badge:Badge
   ) { }
 
   ionViewDidEnter() {

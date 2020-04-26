@@ -31,13 +31,14 @@ export class HomePage {
   constructor(
     private apiMuseum: MuseumService,
     private ble: BLE,
-    public alertController: AlertController
+    public alertController: AlertController,
   ) { }
 
   ionViewDidEnter() {
     this.getExhibitions();
     this.getBeacons();
     this.isEnabled();
+    this.BadgeDeviceReady();
   }
 
 
@@ -46,7 +47,7 @@ export class HomePage {
     this.ble.startStateNotifications().subscribe(state => {
       console.log("Bluetooth is " + state);
       this.bluetoothState = state;
-      if (this.bluetoothState == 'on') { 
+      if (this.bluetoothState == 'on') {
         this.scanForBeacons();
 
       } else if (this.bluetoothState == 'off') {
@@ -72,6 +73,13 @@ export class HomePage {
       this.beaconArray = res;
       console.log("GetBeacons: " + this.beaconArray);
     })
+  }
+
+  //El plugin es accesible una vez el dispostivo este en funcionamiento
+  BadgeDeviceReady() {
+    document.addEventListener('deviceready', function () {
+      // cordova.plugins.notification.badge is now available
+    }, false);
   }
 
   scanForBeacons() {

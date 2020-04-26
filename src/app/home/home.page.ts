@@ -98,6 +98,37 @@ export class HomePage {
     console.log("BEACON FOUND");
   }
 
+  //Metodos que en principio nos sirven para mostrar y limpiar las notificaciones.
+
+    // async increaseBadge(badgeNumber: number){
+  //   try{
+  //     let badge = await this.badge.increase(badgeNumber);
+  //     console.log(badge);
+  //   }catch(e){
+  //     console.error(e)
+  //   }
+  // }
+
+  // async setBadges(badgeNumber: number){
+  //   try{
+  //     let badges = await this.badge.set(badgeNumber);
+  //     console.log(badges);
+  //   }catch(e){
+  //     console.error(e);
+  //   }
+  // }
+
+  // async getBadges(){
+  //   try{
+  //     let badgeAmount = await this.badge.get();
+  //     console.log(badgeAmount);
+  //   }catch(e){
+  //     console.error(e);
+  //   }
+  // }
+
+
+
   //Obtiene un Array con los datos de la descripción de la exhibición.
   getExhibitions() {
     this.apiMuseum.getExhibitionsFromBackEnd().subscribe((res: Array<Exhibitions>) => {

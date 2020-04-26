@@ -36,6 +36,7 @@ export class HomePage {
     private badge:Badge
   ) { }
 
+  //Carga todos lo metodos solo cuando la App este lista
   ionViewDidEnter() {
     this.getExhibitions();
     this.getBeacons();
@@ -43,7 +44,8 @@ export class HomePage {
   }
 
 
-
+  //Revisa si Bluetooth esta activado. Si es así escanea el Beacon. 
+  //En caso contratio saldrá un Alert pidiendo al usuario que lo active.
   isEnabled() {
     this.ble.startStateNotifications().subscribe(state => {
       console.log("Bluetooth is " + state);
@@ -57,7 +59,7 @@ export class HomePage {
     });
   }
 
-
+  //Lanza un Alert con el mensaje escrito.
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Alert',
@@ -69,6 +71,7 @@ export class HomePage {
     await alert.present();
   }
 
+  //Obtiene un Array con todos lo Beacons de la Base de datos
   getBeacons() {
     this.apiMuseum.getBeaconsFromBackEnd().subscribe((res: Array<Beacons>) => {
       this.beaconArray = res;
@@ -76,6 +79,8 @@ export class HomePage {
     })
   }
 
+  //Escanea todos los beacons que tiene cerca.
+  //Si este esta en la BD muestra la información asociada al mismo.
   scanForBeacons() {
     console.log("SCAN...");
     this.ble.startScan([]).subscribe(device => {
@@ -93,6 +98,7 @@ export class HomePage {
     console.log("BEACON FOUND");
   }
 
+  //Obtiene un Array con los datos de la descripción de la exhibición.
   getExhibitions() {
     this.apiMuseum.getExhibitionsFromBackEnd().subscribe((res: Array<Exhibitions>) => {
       this.exhibitArray = res;
@@ -100,6 +106,7 @@ export class HomePage {
     })
   }
 
+  //Obtiene un Array con los datos de la obra. (Se nececita para poder cargar los archivos multimedia)
   getArtworks() {
     this.apiMuseum.getArtworksFromBackEnd().subscribe((res: Array<Artworks>) => {
       this.artArray = res;
@@ -107,6 +114,7 @@ export class HomePage {
     })
   }
 
+  //Permite cambiar de Media y reaccionar a lo que esta escogiendo el usuario.
   changeTypeFile(event) {
     let fileChoice: [String] = event.detail.value;
     if (fileChoice == []) {
@@ -119,6 +127,7 @@ export class HomePage {
     }
   }
 
+  //Una vez el usuario escoge Media, este metodo la carga en la pantalla.
   loadArtWorkShow(fileChoice: [String]) {
     this.artArrayShow = new Array<Artworks>();
     for (let art of this.artArray) {

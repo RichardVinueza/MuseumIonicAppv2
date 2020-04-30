@@ -30,7 +30,7 @@
   font-size: 1em;
   font-weight:bold;
   font-style: normal;
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid #77d8d8;
 }
 
 //Aplicar un tamaño al texto que se mantiene aunque se gire el dispositivo.
@@ -65,12 +65,12 @@
   margin-top: 10px;
   margin-bottom: 10px;
   // border-style: groove;
-  border-left: 6px solid white;
+  border-left: 6px solid #77d8d8;
   // background-color: lightgrey;
   border-radius: 5px;
 }
 
 //El pirmer ion-label después de class="type-file" tendrá el color #59D9F7.
 .type-file ion-label:first-child{
-  color: white;
+  color: black;
 }

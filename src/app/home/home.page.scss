@@ -30,12 +30,14 @@
   font-size: 1em;
   font-weight:bold;
   font-style: normal;
-  border-bottom: 3px solid #0779e4;
+  border-bottom: 3px solid #eff3c6;
+  color: white;
 }
 
 //Aplicar un tamaño al texto que se mantiene aunque se gire el dispositivo.
 .descrip{
   font-size: 1em;
+  color:white;
 }
 
 .descrip:hover{
@@ -65,12 +67,12 @@
   margin-top: 10px;
   margin-bottom: 10px;
   // border-style: groove;
-  border-left: 6px solid #0779e4;
+  border-left: 6px solid #eff3c6;
   // background-color: lightgrey;
   border-radius: 5px;
 }
 
 //El pirmer ion-label después de class="type-file" tendrá el color #59D9F7.
 .type-file ion-label:first-child{
-  color: black;
+  color: white;
 }

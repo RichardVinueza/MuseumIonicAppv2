@@ -27,12 +27,12 @@
 
 //La cabecera color azul casi turquesa
 ion-header{
-    --ion-background-color:#eff3c6;
+    --ion-background-color:#0779e4;
     
 }
 
 ion-content{
-    --ion-background-color:#77d8d8;
+    --ion-background-color:#4cbbb9;
 }
 
 //Cambio de fuente, letra tipo negrilla y un espacio entre cada una de las letras
@@ -67,7 +67,7 @@ ion-fab-button{
     width: 40px;
     height: 40px;
     --color:white;
-    --background: #4cbbb9;
+    --background: #77d8d8;
     // border-style: solid;
     // border-color: red;
 }

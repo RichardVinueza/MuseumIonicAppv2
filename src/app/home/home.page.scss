@@ -27,19 +27,27 @@
 .titles{
   align-items:center;
   margin: 20px 15px 0px; 
-  font-size: 1em;
+  font-size: 1.7em;
   font-weight:bold;
   font-style: normal;
+  font-family: cursive;
   border-bottom: 3px solid #eff3c6;
 }
 
 //Aplicar un tamaño al texto que se mantiene aunque se gire el dispositivo.
 .descrip{
-  font-size: 1em;
+  font-size: 1.1em;
 }
 
 .descrip:hover{
-  color: #59D9F7;
+  color: white;
+}
+
+.descrip ion-label{
+  font-family: monospace;
+  font-style: italic;
+  // font-weight: bold;
+  // letter-spacing: -2px;
 }
 
 //La lista de elementos en la descripción solo ocupan un 72% del espacio horizontal.
@@ -53,8 +61,9 @@
   text-align: center;
   // align-items: center;
   // margin: 5vw 0vw 0vw 38vw;
-  font-size: 1em;
+  font-size: 2.5em;
   font-weight: bold;
+  font-family: cursive;
 }
 
 //Al botón que nos permite alegir media(imagen,audio,vídeo) se centra horizontalmente con respecto a los margenes.
@@ -74,4 +83,5 @@
 .type-file ion-label:first-child{
   color: black;
   font-weight: bold;
+  font-family: cursive;
 }

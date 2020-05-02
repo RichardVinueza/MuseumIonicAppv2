@@ -46,6 +46,9 @@ ion-title{
     font-style: normal;
     letter-spacing: 2px;
     color: white;
+    font-family: cursive;
+    font-size: 2.5em;
+    font-weight: bold;
     // border-style: solid;
     // border-color: rgb(242, 255, 0);
 }
@@ -56,7 +59,7 @@ ion-fab{
     float: right;
     position: relative;
     right: 20px;
-    bottom: 13px;
+    bottom: 25px;
     --color: secondary;
     // border-style: solid;
     // border-color: rgb(242, 255, 0);

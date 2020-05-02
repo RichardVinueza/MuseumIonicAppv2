@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      MUSEUM
+      Museum
     </ion-title>
       <ion-fab fab-fixed>
         <ion-fab-button>
@@ -13,9 +13,9 @@
 </ion-header>
 
 <ion-content style="display: block" class="padding" [fullscreen]="true">
-  <h1 class="titles">EXHIBITIONS</h1>
+  <h1 class="titles">Exhibtion</h1>
   <ion-img class="exhibition" src="http://192.168.0.16:8080/img/icon.png"></ion-img>
-  <h1 class="titles">DESCRIPTION</h1>
+  <h1 class="titles">Description</h1>
   <ng-container *ngFor="let exhibit of exhibitArray">
     <ng-container *ngIf="exhibit.location == 'Area 1'">
       <ion-list id="load-exhibit" lines="none" style="display:none">
@@ -34,7 +34,7 @@
       </ion-list>
     </ng-container>
   </ng-container>
-  <h1 class="titles">ARTWORKS</h1>
+  <h1 class="titles">Artworks</h1>
   <ion-list>
     <ion-item class="type-file">
       <ion-label>TYPE FILE</ion-label>

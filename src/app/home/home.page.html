@@ -4,9 +4,9 @@
       Museum
     </ion-title>
       <ion-fab fab-fixed>
-        <ion-fab-button>
+        <ion-fab-button (click)="decreaseBadges(badgeNumber)">
           <ion-icon name="square-outline"></ion-icon>
-          <ion-badge>1</ion-badge>
+          <ion-badge type="number">{{badgeNumber}}</ion-badge>
         </ion-fab-button>
       </ion-fab>
   </ion-toolbar>

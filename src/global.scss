@@ -25,9 +25,9 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-//La cabecera color azul casi turquesa
+//Determinar el color de fondo de la cabecera y contenido.
 ion-header{
-    --ion-background-color:#eff3c6;
+    --ion-background-color:#0779e4;
     
 }
 
@@ -46,23 +46,25 @@ ion-title{
     font-style: normal;
     letter-spacing: 2px;
     color: white;
+    font-family: cursive;
+    font-size: 2.5em;
+    font-weight: bold;
     // border-style: solid;
     // border-color: rgb(242, 255, 0);
 }
 
+//Centrar el botón de las notificaciones a la derecha centrado
 ion-fab{
     margin: auto;
     float: right;
     position: relative;
     right: 20px;
-    bottom: 13px;
+    bottom: 25px;
     --color: secondary;
     // border-style: solid;
     // border-color: rgb(242, 255, 0);
 }
   
-   
-
 ion-fab-button{
     width: 40px;
     height: 40px;

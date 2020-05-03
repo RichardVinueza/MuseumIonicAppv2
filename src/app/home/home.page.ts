@@ -13,6 +13,8 @@ export class HomePage {
 
   ipAddress = ipAddress;
 
+  badgeNumber: number;
+
   devices: any[] = [];
   beaconArray: Array<Beacons> = [];
   auxDevice: any;
@@ -90,44 +92,42 @@ export class HomePage {
       for (this.beacon of this.beaconArray) {
         if (this.beacon.mac == device.id) {
           console.log("IDs MATCH");
-          document.getElementById("load-exhibit").style.display = "block";
-          this.getArtworks();
+          this.increaseBadges();
         }
       }
     });
     console.log("BEACON FOUND");
   }
 
+  showContent(){
+    if(this.badgeNumber == 0){
+      document.getElementById("load-exhibit").style.display = "block";
+      this.getArtworks();
+    }
+  }
+
   //Metodos que en principio nos sirven para mostrar y limpiar las notificaciones.
 
-    // async increaseBadge(badgeNumber: number){
-  //   try{
-  //     let badge = await this.badge.increase(badgeNumber);
-  //     console.log(badge);
-  //   }catch(e){
-  //     console.error(e)
-  //   }
-  // }
+  async increaseBadges() {
+    try {
+      let increaseBadge = await this.badge.increase(1);
+      this.badgeNumber = increaseBadge;
+      console.log(increaseBadge);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  // async setBadges(badgeNumber: number){
-  //   try{
-  //     let badges = await this.badge.set(badgeNumber);
-  //     console.log(badges);
-  //   }catch(e){
-  //     console.error(e);
-  //   }
-  // }
-
-  // async getBadges(){
-  //   try{
-  //     let badgeAmount = await this.badge.get();
-  //     console.log(badgeAmount);
-  //   }catch(e){
-  //     console.error(e);
-  //   }
-  // }
-
-
+  async decreaseBadges() {
+    try {
+      let decreaseBadge = await this.badge.decrease(1);
+      this.badgeNumber = decreaseBadge;
+      console.log(decreaseBadge);
+      this.showContent();
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   //Obtiene un Array con los datos de la descripción de la exhibición.
   getExhibitions() {

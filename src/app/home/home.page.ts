@@ -14,6 +14,7 @@ export class HomePage {
   ipAddress = ipAddress;
 
   badgeNumber: number;
+  bounceAnimation: any; 
 
   devices: any[] = [];
   beaconArray: Array<Beacons> = [];
@@ -102,6 +103,16 @@ export class HomePage {
       }, 2000);
     }
   }
+
+   //ANIMACIONES
+
+  //Efecto de rebote al recibir una notificación
+
+  // bounce(){
+  //   console.log('BOUNCE ANIMATION');
+  //   this.bounceAnimation = document.getElementById("bounce").style.cssText = 
+  //   'animation:bounce .8s alternate infinite ease-in; @keyframes bounce{ 20%, 50%{ transform: translateY(0px); } 30%{ transform: translateY(-15px); } 60%{transform: translateY(-0.5px);}} ';
+  // }
 
   //Métodos que en principio nos sirven para mostrar las notificaciones tras haber detectado un beacon.
   async increaseBadges() {

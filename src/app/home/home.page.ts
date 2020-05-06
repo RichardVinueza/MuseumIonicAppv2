@@ -35,11 +35,11 @@ export class HomePage {
     private apiMuseum: MuseumService,
     private ble: BLE,
     public alertController: AlertController,
-    private badge:Badge
+    private badge: Badge
   ) { }
 
-  //Carga todos lo metodos solo cuando la App este lista
-  ionViewDidEnter() {
+  //Carga todos lo métodos solo cuando la App este lista
+  ionViewWillEnter() {
     this.getExhibitions();
     this.getBeacons();
     this.isEnabled();
@@ -83,31 +83,27 @@ export class HomePage {
 
   //Escanea todos los beacons que tiene cerca.
   //Si este esta en la BD muestra la información asociada al mismo.
-  scanForBeacons() {
+  async  scanForBeacons() {
     console.log("SCAN...");
-    this.ble.startScan([]).subscribe(device => {
+    let scanConfirmed = await this.ble.startScan([]).subscribe(device => {
       if (device.name) {
         console.log(JSON.stringify(device));
       }
       for (this.beacon of this.beaconArray) {
         if (this.beacon.mac == device.id) {
           console.log("IDs MATCH");
-          this.increaseBadges()
+          console.log("BEACON FOUND");
         }
       }
     });
-    console.log("BEACON FOUND");
-  }
-
-  showContent(){
-    if(this.badgeNumber == 0){
-      document.getElementById("load-exhibit").style.display = "block";
-      this.getArtworks();
+    if (scanConfirmed) {
+      setTimeout(() => {
+        this.increaseBadges();
+      }, 2000);
     }
   }
 
-  //Metodos que en principio nos sirven para mostrar y limpiar las notificaciones.
-
+  //Métodos que en principio nos sirven para mostrar las notificaciones tras haber detectado un beacon.
   async increaseBadges() {
     try {
       this.badgeNumber = await this.badge.increase(1);
@@ -117,14 +113,29 @@ export class HomePage {
     }
   }
 
+  async setBadges() {
+    try {
+      this.badgeNumber = await this.badge.set(0);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   async decreaseBadges() {
     try {
-     this.badgeNumber = await this.badge.decrease(1);
+      this.badgeNumber = await this.badge.decrease(1);
       console.log(this.badgeNumber);
       this.showContent();
     } catch (e) {
       console.log(e);
     }
+  }
+
+  //Este método muestra el contenido después de haberse cumplido la promesa "scanConfirmed" 
+  // y el usuario haber pulsado el botón de las notificaciones.
+  showContent() {
+    document.getElementById("load-exhibit").style.display = "block";
+    this.getArtworks();
   }
 
   //Obtiene un Array con los datos de la descripción de la exhibición.
@@ -156,7 +167,7 @@ export class HomePage {
     }
   }
 
-  //Una vez el usuario escoge Media, este metodo la carga en la pantalla.
+  //Una vez el usuario escoge Media, este método la carga en la pantalla.
   loadArtWorkShow(fileChoice: [String]) {
     this.artArrayShow = new Array<Artworks>();
     for (let art of this.artArray) {

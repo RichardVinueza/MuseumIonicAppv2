@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -26,60 +26,76 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 //Determinar el color de fondo de la cabecera y contenido.
-ion-header{
-    --ion-background-color:#0779e4;
-    
+ion-header {
+  --ion-background-color: #0779e4;
 }
 
-ion-content{
-    --ion-background-color:#77d8d8;
+ion-content {
+  --ion-background-color: #77d8d8;
 }
 
 //Cambio de fuente, letra tipo negrilla y un espacio entre cada una de las letras
-ion-title{
-    text-align: center;
-    width: min-content;
-    margin:auto;
-    position: relative;
-    top: 20px;
-    font-weight: bold;
-    font-style: normal;
-    letter-spacing: 2px;
-    color: white;
-    font-family: cursive;
-    font-size: 2.5em;
-    font-weight: bold;
-    // border-style: solid;
-    // border-color: rgb(242, 255, 0);
+ion-title {
+  text-align: center;
+  width: min-content;
+  margin: auto;
+  position: relative;
+  top: 20px;
+  font-weight: bold;
+  font-style: normal;
+  letter-spacing: 2px;
+  color: white;
+  font-family: cursive;
+  font-size: 2.5em;
+  font-weight: bold;
+  // border-style: solid;
+  // border-color: rgb(242, 255, 0);
 }
 
 //Centrar el botón de las notificaciones a la derecha centrado
-ion-fab{
-    margin: auto;
-    float: right;
-    position: relative;
-    right: 20px;
-    bottom: 25px;
-    --color: secondary;
-    // border-style: solid;
-    // border-color: rgb(242, 255, 0);
-}
-  
-ion-fab-button{
-    width: 40px;
-    height: 40px;
-    --color:white;
-    --background: #4cbbb9;
-    // border-style: solid;
-    // border-color: red;
+ion-fab {
+  margin: auto;
+  float: right;
+  position: relative;
+  right: 20px;
+  bottom: 25px;
+  --color: secondary;
+  // border-style: solid;
+  // border-color: rgb(242, 255, 0);
 }
 
-ion-icon{
-    width: 15px;
-    height: 15px;
+ion-fab-button {
+  width: 40px;
+  height: 40px;
+  --color: white;
+  --background: #4cbbb9;
+  // border-style: solid;
+  // border-color: red;
 }
 
-ion-badge{
-    background: none;
-    color:white;
+#bounce{
+    animation:bounce .8s alternate infinite ease-in;
+}
+
+@keyframes bounce {
+  20%,
+  50% {
+    transform: translateY(0px);
+  }
+  30% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-0.5px);
+  }
+}
+
+ion-icon {
+  width: 15px;
+  height: 15px;
+}
+
+ion-badge {
+  background: none;
+  color: white;
 }

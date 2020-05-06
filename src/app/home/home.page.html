@@ -3,8 +3,8 @@
     <ion-title>
       Museum
     </ion-title>
-    <ion-fab fab-fixed>
-      <ion-fab-button (click)="decreaseBadges(badgeNumber)">
+    <ion-fab fab-fixed (click)="decreaseBadges()">
+      <ion-fab-button >
         <ion-icon name="square-outline"></ion-icon>
         <ion-badge type="number">{{badgeNumber}}</ion-badge>
       </ion-fab-button>

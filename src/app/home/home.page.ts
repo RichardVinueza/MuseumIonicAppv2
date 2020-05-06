@@ -92,7 +92,7 @@ export class HomePage {
       for (this.beacon of this.beaconArray) {
         if (this.beacon.mac == device.id) {
           console.log("IDs MATCH");
-          this.increaseBadges();
+          this.increaseBadges()
         }
       }
     });
@@ -110,9 +110,8 @@ export class HomePage {
 
   async increaseBadges() {
     try {
-      let increaseBadge = await this.badge.increase(1);
-      this.badgeNumber = increaseBadge;
-      console.log(increaseBadge);
+      this.badgeNumber = await this.badge.increase(1);
+      console.log(this.badgeNumber);
     } catch (e) {
       console.log(e);
     }
@@ -120,9 +119,8 @@ export class HomePage {
 
   async decreaseBadges() {
     try {
-      let decreaseBadge = await this.badge.decrease(1);
-      this.badgeNumber = decreaseBadge;
-      console.log(decreaseBadge);
+     this.badgeNumber = await this.badge.decrease(1);
+      console.log(this.badgeNumber);
       this.showContent();
     } catch (e) {
       console.log(e);

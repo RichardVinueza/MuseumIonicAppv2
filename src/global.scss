@@ -34,7 +34,7 @@ ion-content {
   --ion-background-color: #77d8d8;
 }
 
-//Cambio de fuente, letra tipo negrilla y un espacio entre cada una de las letras
+//Cambio de fuente, letra tipo negrilla y un espacio entre cada una de las letras.
 ion-title {
   text-align: center;
   width: min-content;
@@ -52,7 +52,7 @@ ion-title {
   // border-color: rgb(242, 255, 0);
 }
 
-//Centrar el botón de las notificaciones a la derecha centrado
+//Centrar el botón de las notificaciones a la derecha centrado.
 ion-fab {
   margin: auto;
   float: right;
@@ -64,6 +64,7 @@ ion-fab {
   // border-color: rgb(242, 255, 0);
 }
 
+//Tamaño del botón, color del icono y color de fondo.
 ion-fab-button {
   width: 40px;
   height: 40px;
@@ -73,28 +74,30 @@ ion-fab-button {
   // border-color: red;
 }
 
-#bounce {
-  animation: bounce 0.8s alternate infinite ease-in;
-}
+// #bounce {
+//   animation: bounce 0.8s alternate infinite ease-in;
+// }
 
-@keyframes bounce {
-  20%,
-  50% {
-    transform: translateY(0px);
-  }
-  30% {
-    transform: translateY(-15px);
-  }
-  60% {
-    transform: translateY(-0.5px);
-  }
-}
+// @keyframes bounce {
+//   20%,
+//   50% {
+//     transform: translateY(0px);
+//   }
+//   30% {
+//     transform: translateY(-15px);
+//   }
+//   60% {
+//     transform: translateY(-0.5px);
+//   }
+// }
 
+//Tamaño del icono
 ion-icon {
   width: 15px;
   height: 15px;
 }
 
+//Color y fondo de la etiqueta ion-badge
 ion-badge {
   background: none;
   color: white;

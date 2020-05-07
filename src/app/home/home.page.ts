@@ -14,7 +14,7 @@ export class HomePage {
   ipAddress = ipAddress;
 
   badgeNumber: number;
-  bounceAnimation: any; 
+  bounceAnimation: any;
 
   devices: any[] = [];
   beaconArray: Array<Beacons> = [];
@@ -100,19 +100,27 @@ export class HomePage {
     if (scanConfirmed) {
       setTimeout(() => {
         this.increaseBadges();
+        this.playBounce();
       }, 2000);
     }
   }
 
-   //ANIMACIONES
+  //ANIMACIONES
 
   //Efecto de rebote al recibir una notificación
 
-  // bounce(){
-  //   console.log('BOUNCE ANIMATION');
-  //   this.bounceAnimation = document.getElementById("bounce").style.cssText = 
-  //   'animation:bounce .8s alternate infinite ease-in; @keyframes bounce{ 20%, 50%{ transform: translateY(0px); } 30%{ transform: translateY(-15px); } 60%{transform: translateY(-0.5px);}} ';
-  // }
+  playBounce(){
+    console.log('BOUNCE ANIMATION'); 
+    this.bounceAnimation = document.getElementById("bounce").animate([
+      // keyframes
+      { transform: 'translateY(0px)' }, 
+      { transform: 'translateY(-12px)' }
+    ], { 
+      // timing options
+      duration: 600,
+      iterations: Infinity
+    });
+  }
 
   //Métodos que en principio nos sirven para mostrar las notificaciones tras haber detectado un beacon.
   async increaseBadges() {
@@ -145,8 +153,10 @@ export class HomePage {
   //Este método muestra el contenido después de haberse cumplido la promesa "scanConfirmed" 
   // y el usuario haber pulsado el botón de las notificaciones.
   showContent() {
-    document.getElementById("load-exhibit").style.display = "block";
-    this.getArtworks();
+    if(this.badgeNumber == 0){
+      document.getElementById("load-exhibit").style.display = "block";
+      this.getArtworks();
+    }
   }
 
   //Obtiene un Array con los datos de la descripción de la exhibición.

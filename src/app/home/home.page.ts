@@ -9,6 +9,7 @@ import {
 import { BLE } from "@ionic-native/ble/ngx";
 import { AlertController } from "@ionic/angular";
 import { Badge } from "@ionic-native/badge/ngx";
+import { AnimationController } from "@ionic/angular";
 
 @Component({
   selector: "app-home",
@@ -41,7 +42,8 @@ export class HomePage {
     private apiMuseum: MuseumService,
     private ble: BLE,
     public alertController: AlertController,
-    private badge: Badge
+    private badge: Badge,
+    private animationCtrl: AnimationController
   ) {}
 
   //Carga todos lo métodos solo cuando la App este lista
@@ -49,6 +51,7 @@ export class HomePage {
     this.getExhibitions();
     this.getBeacons();
     this.isEnabled();
+    this.createBounceAnimation();
   }
 
   //ESTADO DE BLUETOOH Y DETECCIÓN DE BEACONS
@@ -105,42 +108,12 @@ export class HomePage {
     if (scanConfirmed) {
       setTimeout(() => {
         this.increaseBadges();
-        this.playBounceAnimation();
+        this.bounceAnimation.play();
       }, 2000);
     }
   }
 
   //NOTIFICACIONES Y ANIMACIONES
-
-  //Efecto de rebote al recibir una notificación
-  // bounceAnimation() {
-  //   this.animation.createAnimation()
-  //     .addElement(document.querySelector("#bounce"))
-  //     .duration(500)
-  //     .iterations(Infinity)
-  //     .keyframes([
-  //       { transform: "translateY(0px)" },
-  //       { transform: "translateY(12px)" },
-  //     ]);
-  //   this.animation.play();
-  // }
-
-  playBounceAnimation() {
-    console.log("BOUNCE ANIMATION");
-    this.bounceAnimation = document.getElementById("bounce").animate(
-      [
-        // keyframes
-        { transform: "translateY(0px)" },
-        { transform: "translateY(-6px)" },
-        { transform: "translateY(0px)" },
-      ],
-      {
-        // timing options
-        duration: 600,
-        iterations: Infinity,
-      }
-    );
-  }
 
   //Métodos que en principio nos sirven para mostrar las notificaciones tras haber detectado un beacon.
   async increaseBadges() {
@@ -169,6 +142,43 @@ export class HomePage {
       console.log(e);
     }
   }
+
+  //Dos formas de crear una animación de rebote al recibir una notioficación.
+
+  // 1º forma:  https://ionicframework.com/docs/utilities/animations
+  //Esta forma es mejor ya que primero solo se crea la animación y luego decidimos utilizarla donde y cuando corresponda.
+  createBounceAnimation() {
+    this.bounceAnimation = this.animationCtrl
+      .create()
+      .addElement(document.querySelector("#bounce"))
+      .duration(600)
+      .iterations(Infinity)
+      .keyframes([
+        { offset: 0, transform: "translateY(0px)" }, 
+        { offset: 0.5, transform: "translateY(-6px)"},
+        { offset: 1, transform: "translateY(0px)"},
+      ]);
+  }
+
+  //2º forma: https://developer.mozilla.org/es/docs/Web/API/Element/animate
+  //Igual de válida que la anterior, pero que se ejecuta desde el principio y es menos dinámica.
+  
+  // playBounceAnimation() {
+  //   console.log("BOUNCE ANIMATION");
+  //   this.bounceAnimation = document.getElementById("bounce").animate(
+  //     [
+  //       // keyframes
+  //       { transform: "translateY(0px)" },
+  //       { transform: "translateY(-6px)" },
+  //       { transform: "translateY(0px)" },
+  //     ],
+  //     {
+  //       // timing options
+  //       duration: 600,
+  //       iterations: Infinity,
+  //     }
+  //   );
+  // }
 
   //CARGAR Y MOSTRAR CONTENIDO
 

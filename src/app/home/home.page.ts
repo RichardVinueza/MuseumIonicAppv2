@@ -48,7 +48,6 @@ export class HomePage {
 
   //Carga todos lo métodos solo cuando la App este lista
   ionViewWillEnter() {
-    this.getExhibitions();
     this.getBeacons();
     this.isEnabled();
     this.createBounceAnimation();
@@ -187,7 +186,7 @@ export class HomePage {
   showContent() {
     if (this.badgeNumber == 0) {
       this.bounceAnimation.pause();
-      document.getElementById("load-exhibit").style.display = "block";
+      this.getExhibitions();
       this.getArtworks();
     }
   }

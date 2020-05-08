@@ -3,12 +3,12 @@
     <ion-title>
       Museum
     </ion-title>
-      <ion-fab fab-fixed>
-        <ion-fab-button (click)="decreaseBadges(badgeNumber)">
-          <ion-icon name="square-outline"></ion-icon>
-          <ion-badge type="number">{{badgeNumber}}</ion-badge>
-        </ion-fab-button>
-      </ion-fab>
+    <ion-fab>
+      <ion-fab-button id="bounce" (click)="decreaseBadges()">
+        <ion-icon name="square-outline"></ion-icon>
+        <ion-badge>{{badgeNumber}}</ion-badge>
+      </ion-fab-button>
+    </ion-fab>
   </ion-toolbar>
 </ion-header>
 
@@ -18,7 +18,7 @@
   <h1 class="titles">Description</h1>
   <ng-container *ngFor="let exhibit of exhibitArray">
     <ng-container *ngIf="exhibit.location == 'Area 1'">
-      <ion-list id="load-exhibit" lines="none" style="display:none">
+      <ion-list id="load-exhibit" lines="none">
         <ion-item class="descrip">
           <ion-label>Name: {{exhibit.name}}</ion-label>
         </ion-item>

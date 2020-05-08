@@ -1,19 +1,26 @@
-import { Component } from '@angular/core';
-import { MuseumService, Exhibitions, Artworks, ipAddress, Beacons } from '../services/museum.service';
-import { BLE } from '@ionic-native/ble/ngx';
-import { AlertController } from '@ionic/angular';
-import { Badge } from '@ionic-native/badge/ngx';
+import { Component } from "@angular/core";
+import {
+  MuseumService,
+  Exhibitions,
+  Artworks,
+  ipAddress,
+  Beacons,
+} from "../services/museum.service";
+import { BLE } from "@ionic-native/ble/ngx";
+import { AlertController } from "@ionic/angular";
+import { Badge } from "@ionic-native/badge/ngx";
+import { AnimationController } from "@ionic/angular";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: "app-home",
+  templateUrl: "home.page.html",
+  styleUrls: ["home.page.scss"],
 })
 export class HomePage {
-
   ipAddress = ipAddress;
 
   badgeNumber: number;
+  bounceAnimation: any;
 
   devices: any[] = [];
   beaconArray: Array<Beacons> = [];
@@ -35,27 +42,28 @@ export class HomePage {
     private apiMuseum: MuseumService,
     private ble: BLE,
     public alertController: AlertController,
-    private badge:Badge
-  ) { }
+    private badge: Badge,
+    private animationCtrl: AnimationController
+  ) {}
 
-  //Carga todos lo metodos solo cuando la App este lista
-  ionViewDidEnter() {
-    this.getExhibitions();
+  //Carga todos lo métodos solo cuando la App este lista
+  ionViewWillEnter() {
     this.getBeacons();
     this.isEnabled();
+    this.createBounceAnimation();
   }
 
+  //ESTADO DE BLUETOOH Y DETECCIÓN DE BEACONS
 
-  //Revisa si Bluetooth esta activado. Si es así escanea el Beacon. 
+  //Revisa si Bluetooth esta activado. Si es así escanea el Beacon.
   //En caso contratio saldrá un Alert pidiendo al usuario que lo active.
   isEnabled() {
-    this.ble.startStateNotifications().subscribe(state => {
+    this.ble.startStateNotifications().subscribe((state) => {
       console.log("Bluetooth is " + state);
       this.bluetoothState = state;
-      if (this.bluetoothState == 'on') {
+      if (this.bluetoothState == "on") {
         this.scanForBeacons();
-
-      } else if (this.bluetoothState == 'off') {
+      } else if (this.bluetoothState == "off") {
         this.presentAlert();
       }
     });
@@ -64,10 +72,10 @@ export class HomePage {
   //Lanza un Alert con el mensaje escrito.
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'BLUETOOTH',
-      message: 'Please, turn on Bluetooth to use App',
-      buttons: ['OK']
+      header: "Alert",
+      subHeader: "BLUETOOTH",
+      message: "Please, turn on Bluetooth to use App",
+      buttons: ["OK"],
     });
 
     await alert.present();
@@ -78,41 +86,47 @@ export class HomePage {
     this.apiMuseum.getBeaconsFromBackEnd().subscribe((res: Array<Beacons>) => {
       this.beaconArray = res;
       console.log("GetBeacons: " + this.beaconArray);
-    })
+    });
   }
 
   //Escanea todos los beacons que tiene cerca.
   //Si este esta en la BD muestra la información asociada al mismo.
-  scanForBeacons() {
+  async scanForBeacons() {
     console.log("SCAN...");
-    this.ble.startScan([]).subscribe(device => {
+    let scanConfirmed = await this.ble.startScan([]).subscribe((device) => {
       if (device.name) {
         console.log(JSON.stringify(device));
       }
       for (this.beacon of this.beaconArray) {
         if (this.beacon.mac == device.id) {
           console.log("IDs MATCH");
-          this.increaseBadges();
+          console.log("BEACON FOUND");
         }
       }
     });
-    console.log("BEACON FOUND");
-  }
-
-  showContent(){
-    if(this.badgeNumber == 0){
-      document.getElementById("load-exhibit").style.display = "block";
-      this.getArtworks();
+    if (scanConfirmed) {
+      setTimeout(() => {
+        this.increaseBadges();
+        this.bounceAnimation.play();
+      }, 2000);
     }
   }
 
-  //Metodos que en principio nos sirven para mostrar y limpiar las notificaciones.
+  //NOTIFICACIONES Y ANIMACIONES
 
+  //Métodos que en principio nos sirven para mostrar las notificaciones tras haber detectado un beacon.
   async increaseBadges() {
     try {
-      let increaseBadge = await this.badge.increase(1);
-      this.badgeNumber = increaseBadge;
-      console.log(increaseBadge);
+      this.badgeNumber = await this.badge.increase(1);
+      console.log(this.badgeNumber);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async setBadges() {
+    try {
+      this.badgeNumber = await this.badge.set(0);
     } catch (e) {
       console.log(e);
     }
@@ -120,29 +134,81 @@ export class HomePage {
 
   async decreaseBadges() {
     try {
-      let decreaseBadge = await this.badge.decrease(1);
-      this.badgeNumber = decreaseBadge;
-      console.log(decreaseBadge);
+      this.badgeNumber = await this.badge.decrease(1);
+      console.log(this.badgeNumber);
       this.showContent();
     } catch (e) {
       console.log(e);
     }
   }
 
+  //Dos formas de crear una animación de rebote al recibir una notioficación.
+
+  // 1º forma:  https://ionicframework.com/docs/utilities/animations
+  //Esta forma es mejor ya que primero solo se crea la animación y luego decidimos utilizarla donde y cuando corresponda.
+  createBounceAnimation() {
+    this.bounceAnimation = this.animationCtrl
+      .create()
+      .addElement(document.querySelector("#bounce"))
+      .duration(600)
+      .iterations(Infinity)
+      .keyframes([
+        { offset: 0, transform: "translateY(0px)" }, 
+        { offset: 0.5, transform: "translateY(-6px)"},
+        { offset: 1, transform: "translateY(0px)"},
+      ]);
+  }
+
+  //2º forma: https://developer.mozilla.org/es/docs/Web/API/Element/animate
+  //Igual de válida que la anterior, pero que se ejecuta desde el principio y es menos dinámica.
+  
+  // playBounceAnimation() {
+  //   console.log("BOUNCE ANIMATION");
+  //   this.bounceAnimation = document.getElementById("bounce").animate(
+  //     [
+  //       // keyframes
+  //       { transform: "translateY(0px)" },
+  //       { transform: "translateY(-6px)" },
+  //       { transform: "translateY(0px)" },
+  //     ],
+  //     {
+  //       // timing options
+  //       duration: 600,
+  //       iterations: Infinity,
+  //     }
+  //   );
+  // }
+
+  //CARGAR Y MOSTRAR CONTENIDO
+
+  //Este método muestra el contenido después de haberse cumplido la promesa "scanConfirmed"
+  // y el usuario haber pulsado el botón de las notificaciones.
+  showContent() {
+    if (this.badgeNumber == 0) {
+      this.bounceAnimation.pause();
+      this.getExhibitions();
+      this.getArtworks();
+    }
+  }
+
   //Obtiene un Array con los datos de la descripción de la exhibición.
   getExhibitions() {
-    this.apiMuseum.getExhibitionsFromBackEnd().subscribe((res: Array<Exhibitions>) => {
-      this.exhibitArray = res;
-      console.log("GetExhibitions: " + this.exhibitArray);
-    })
+    this.apiMuseum
+      .getExhibitionsFromBackEnd()
+      .subscribe((res: Array<Exhibitions>) => {
+        this.exhibitArray = res;
+        console.log("GetExhibitions: " + this.exhibitArray);
+      });
   }
 
   //Obtiene un Array con los datos de la obra. (Se nececita para poder cargar los archivos multimedia)
   getArtworks() {
-    this.apiMuseum.getArtworksFromBackEnd().subscribe((res: Array<Artworks>) => {
-      this.artArray = res;
-      console.log("GetArtworks: " + this.artArray);
-    })
+    this.apiMuseum
+      .getArtworksFromBackEnd()
+      .subscribe((res: Array<Artworks>) => {
+        this.artArray = res;
+        console.log("GetArtworks: " + this.artArray);
+      });
   }
 
   //Permite cambiar de Media y reaccionar a lo que esta escogiendo el usuario.
@@ -158,7 +224,7 @@ export class HomePage {
     }
   }
 
-  //Una vez el usuario escoge Media, este metodo la carga en la pantalla.
+  //Una vez el usuario escoge Media, este método la carga en la pantalla.
   loadArtWorkShow(fileChoice: [String]) {
     this.artArrayShow = new Array<Artworks>();
     for (let art of this.artArray) {
@@ -174,5 +240,4 @@ export class HomePage {
     }
     console.log(this.artArrayShow);
   }
-
 }

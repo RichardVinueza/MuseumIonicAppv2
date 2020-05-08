@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -25,61 +25,135 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+/*Google Fonts*/
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Aguafina+Script&family=Balsamiq+Sans&family=Bree+Serif&family=Caveat:wght@400;700&family=Courgette&family=Dancing+Script&display=swap&family=Dynalight&family=Engagement&family=Fira+Sans+Extra+Condensed:ital,wght@0,400;1,300&family=Galada&family=Great+Vibes&family=Kaushan+Script&family=Kite+One&family=Lobster&family=Lobster+Two:ital,wght@0,400;0,700;1,700&family=Mr+Bedfort&family=Oswald:wght@200&family=PT+Sans&family=Pacifico&family=Parisienne&family=Roboto&family=Romanesco&family=Sacramento&family=Satisfy&family=Sevillana&family=Song+Myung&family=Ubuntu+Condensed&display=swap");
+/*
+font-family: 'Roboto', sans-serif; XX
+font-family: 'Balsamiq Sans', cursive; XX
+font-family: 'PT Sans', sans-serif; XX
+font-family: 'Dancing Script', cursive; XX MT
+font-family: 'Lobster', cursive; XX T
+font-family: 'Pacifico', cursive; XX
+font-family: 'Acme', sans-serif; XX
+font-family: 'Bree Serif', serif; XX T
+font-family: 'Ubuntu Condensed', sans-serif; XX T
+font-family: 'Caveat', cursive; XX M
+font-family: 'Satisfy', cursive; XX MT
+font-family: 'Courgette', cursive; XX T
+font-family: 'Galada', cursive; XX
+font-family: 'Kaushan Script', cursive; XX T
+font-family: 'Great Vibes', cursive; XX M
+font-family: 'Lobster Two', cursive; XX MT
+font-family: 'Sacramento', cursive; XX
+font-family: 'Parisienne', cursive; XX M
+font-family: 'Fira Sans Extra Condensed', sans-serif; XX
+font-family: 'Mr Bedfort', cursive; XX
+font-family: 'Sevillana', cursive; XX
+font-family: 'Romanesco', cursive; XX T
+font-family: 'Song Myung', serif; XX
+font-family: 'Engagement', cursive; XX T
+font-family: 'Dynalight', cursive; X T
+font-family: 'Kite One', sans-serif; X
+font-family: 'Aguafina Script', cursive; X
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caladea&family=Condiment&family=Damion&family=Homenaje&family=Jaldi&family=Jost:wght@300;400&family=Karma:wght@500&family=Niconne&family=Oleo+Script&family=PT+Sans+Narrow&family=Pattaya&family=Philosopher&family=Playball&family=Sofia&family=Suravaram&family=Tenali+Ramakrishna&family=Yellowtail&display=swap");
+
+/*
+font-family: 'Caladea', serif; X
+font-family: 'Karma', serif; X
+font-family: 'Jaldi', sans-serif; X
+font-family: 'Playball', cursive; X M
+font-family: 'Yellowtail', cursive; X
+font-family: 'Philosopher', sans-serif; X
+font-family: 'Bebas Neue', cursive; X
+font-family: 'Jost', sans-serif; X
+font-family: 'PT Sans Narrow', sans-serif; X
+font-family: 'Damion', cursive; X M
+font-family: 'Oleo Script', cursive; X
+font-family: 'Suravaram', serif; X
+font-family: 'Tenali Ramakrishna', sans-serif; X
+font-family: 'Condiment', cursive; X
+font-family: 'Homenaje', sans-serif; X
+font-family: 'Sofia', cursive; X
+font-family: 'Pattaya', sans-serif; X
+font-family: 'Niconne', cursive; X
+*/
+
+/*ESTILOS GLOBALES*/
 //Determinar el color de fondo de la cabecera y contenido.
-ion-header{
-    --ion-background-color:#0779e4;
-    
+ion-header {
+  --ion-background-color: #0779e4;
 }
 
-ion-content{
-    --ion-background-color:#77d8d8;
+ion-content {
+  --ion-background-color: #77d8d8;
 }
 
-//Cambio de fuente, letra tipo negrilla y un espacio entre cada una de las letras
-ion-title{
-    text-align: center;
-    width: min-content;
-    margin:auto;
-    position: relative;
-    top: 20px;
-    font-weight: bold;
-    font-style: normal;
-    letter-spacing: 2px;
-    color: white;
-    font-family: cursive;
-    font-size: 2.5em;
-    font-weight: bold;
-    // border-style: solid;
-    // border-color: rgb(242, 255, 0);
+//Cambio de fuente, letra tipo negrilla y un espacio entre cada una de las letras.
+ion-title {
+  text-align: center;
+  width: min-content;
+  margin: auto;
+  position: relative;
+  top: 20px;
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: 2px;
+  color: white;
+  font-family: 'Lobster Two', cursive;
+  font-size: 2.5em;
+  // border-style: solid;
+  // border-color: rgb(242, 255, 0);
 }
 
-//Centrar el botón de las notificaciones a la derecha centrado
-ion-fab{
-    margin: auto;
-    float: right;
-    position: relative;
-    right: 20px;
-    bottom: 25px;
-    --color: secondary;
-    // border-style: solid;
-    // border-color: rgb(242, 255, 0);
-}
-  
-ion-fab-button{
-    width: 40px;
-    height: 40px;
-    --color:white;
-    --background: #4cbbb9;
-    // border-style: solid;
-    // border-color: red;
+//Centrar el botón de las notificaciones a la derecha centrado.
+ion-fab {
+  margin: auto;
+  float: right;
+  position: relative;
+  right: 20px;
+  bottom: 25px;
+  --color: secondary;
+  // border-style: solid;
+  // border-color: rgb(242, 255, 0);
 }
 
-ion-icon{
-    width: 15px;
-    height: 15px;
+//Tamaño del botón, color del icono y color de fondo.
+ion-fab-button {
+  width: 40px;
+  height: 40px;
+  --color: white;
+  --background: #4cbbb9;
+  // border-style: solid;
+  // border-color: red;
 }
 
-ion-badge{
-    background: none;
-    color:white;
+// #bounce {
+//   animation: bounce 0.8s alternate infinite ease-in;
+// }
+
+// @keyframes bounce {
+//   20%,
+//   50% {
+//     transform: translateY(0px);
+//   }
+//   30% {
+//     transform: translateY(-15px);
+//   }
+//   60% {
+//     transform: translateY(-0.5px);
+//   }
+// }
+
+//Tamaño del icono
+ion-icon {
+  width: 15px;
+  height: 15px;
+}
+
+//Color y fondo de la etiqueta ion-badge
+ion-badge {
+  background: none;
+  color: white;
 }

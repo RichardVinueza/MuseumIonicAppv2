@@ -1,15 +1,14 @@
-
 //Centrar imagen respecto a los margenes y adaptar su tamaño.
-.exhibition{
-  align-items:center;
+.exhibition {
+  align-items: center;
   max-width: 50vw;
   max-height: 50vw;
   margin: 40px 15px 40px;
 }
 
 //Centrar media(imagenes,audios,video) horizontalmente, darles un tamaño máximo y una separación entre otros elementos.
-.media{
-  align-items:center;
+.media {
+  align-items: center;
   max-width: 18.75em;
   margin: 0 auto;
   margin-top: 10px;
@@ -24,40 +23,43 @@
 //Centrar los titulos horizontalmente con respecto a los margenes.
 //Aplicar una fuente,peso y estilo de letra.
 //Subrayar el texto para crear efecto de separación entre bloques.
-.titles{
-  align-items:center;
-  margin: 20px 15px 0px; 
-  font-size: 1.7em;
-  font-weight:bold;
+.titles {
+  align-items: center;
+  margin: 20px 15px 0px;
+  font-size: 1.5em;
+  font-weight: normal;
   font-style: normal;
-  font-family: cursive;
+  font-family: 'Lobster Two', cursive;
+  // letter-spacing: 3px;
   border-bottom: 3px solid #eff3c6;
 }
 
 //Aplicar un tamaño al texto que se mantiene aunque se gire el dispositivo.
-.descrip{
+.descrip {
   font-size: 1.1em;
 }
 
-.descrip:hover{
+//Al pulsar el texto cambia su color.
+.descrip:hover {
   color: white;
 }
 
-.descrip ion-label{
-  font-family: monospace;
-  font-style: italic;
-  // font-weight: bold;
-  // letter-spacing: -2px;
+//Aplicar fuente y estilo a la descripción
+.descrip ion-label {
+  font-family: "Oswald", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0.1em;
 }
 
 //La lista de elementos en la descripción solo ocupan un 72% del espacio horizontal.
-#load-exhibit{
+#load-exhibit {
   max-width: 72%;
 }
 
 //El título de la obra se centra horizontalmente con un tamaño y peso determinado.
-//Su tamaño se mantiene aunque se gire la pantalla.
-.artworks{
+//Su tamaño se mantiene aunque se gire la pantalla (RESPONSIVE).
+.artworks {
   text-align: center;
   // align-items: center;
   // margin: 5vw 0vw 0vw 38vw;
@@ -68,9 +70,9 @@
 
 //Al botón que nos permite alegir media(imagen,audio,vídeo) se centra horizontalmente con respecto a los margenes.
 //Decorar su borde izquierdo aplicando estilos de borde redondo y color.
-.type-file{
-  align-items:center;
-  margin: 20px 15px 0px; 
+.type-file {
+  align-items: center;
+  margin: 20px 15px 0px;
   margin-top: 10px;
   margin-bottom: 10px;
   // border-style: groove;
@@ -80,8 +82,9 @@
 }
 
 //El pirmer ion-label después de class="type-file" tendrá el color #59D9F7.
-.type-file ion-label:first-child{
+.type-file ion-label:first-child {
   color: black;
   font-weight: bold;
-  font-family: cursive;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.1em;
 }

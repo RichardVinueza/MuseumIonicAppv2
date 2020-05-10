@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 
-export const ipAddress = "http://192.168.0.16:8080";
+export const ipAddress = "http://192.168.0.17:8080";
 
 export class Exhibitions {
   id: number;

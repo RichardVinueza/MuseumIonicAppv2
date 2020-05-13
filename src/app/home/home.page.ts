@@ -48,8 +48,8 @@ export class HomePage {
 
   //Carga todos lo métodos solo cuando la App este lista
   ionViewWillEnter() {
-    this.getBeacons();
     this.isEnabled();
+    this.getBeacons();
     this.createBounceAnimation();
   }
 
@@ -106,9 +106,14 @@ export class HomePage {
     });
     if (scanConfirmed) {
       setTimeout(() => {
+        this.setBadges();
         this.increaseBadges();
         this.bounceAnimation.play();
       }, 2000);
+      let btnNotification = document.getElementById("bounce");
+      btnNotification.addEventListener("click", () => {
+        this.showContent();
+      });
     }
   }
 
@@ -136,7 +141,6 @@ export class HomePage {
     try {
       this.badgeNumber = await this.badge.decrease(1);
       console.log(this.badgeNumber);
-      this.showContent();
     } catch (e) {
       console.log(e);
     }
@@ -153,15 +157,15 @@ export class HomePage {
       .duration(600)
       .iterations(Infinity)
       .keyframes([
-        { offset: 0, transform: "translateY(0px)" }, 
-        { offset: 0.5, transform: "translateY(-6px)"},
-        { offset: 1, transform: "translateY(0px)"},
+        { offset: 0, transform: "translateY(0px)" },
+        { offset: 0.5, transform: "translateY(-6px)" },
+        { offset: 1, transform: "translateY(0px)" },
       ]);
   }
 
   //2º forma: https://developer.mozilla.org/es/docs/Web/API/Element/animate
   //Igual de válida que la anterior, pero que se ejecuta desde el principio y es menos dinámica.
-  
+
   // playBounceAnimation() {
   //   console.log("BOUNCE ANIMATION");
   //   this.bounceAnimation = document.getElementById("bounce").animate(
@@ -183,12 +187,15 @@ export class HomePage {
 
   //Este método muestra el contenido después de haberse cumplido la promesa "scanConfirmed"
   // y el usuario haber pulsado el botón de las notificaciones.
-  showContent() {
-    if (this.badgeNumber == 0) {
-      this.bounceAnimation.pause();
+  async showContent() {
+    let bounceAwait = this.bounceAnimation.pause();
+    if(bounceAwait){
+      this.decreaseBadges(); 
       this.getExhibitions();
       this.getArtworks();
     }
+    
+
   }
 
   //Obtiene un Array con los datos de la descripción de la exhibición.

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, NgZone } from "@angular/core";
 import {
   MuseumService,
   Exhibitions,
@@ -41,6 +41,7 @@ export class HomePage {
   constructor(
     private apiMuseum: MuseumService,
     private ble: BLE,
+    private ngZone: NgZone,
     public alertController: AlertController,
     private badge: Badge,
     private animationCtrl: AnimationController
@@ -49,7 +50,6 @@ export class HomePage {
   //Carga todos lo métodos solo cuando la App este lista
   ionViewDidEnter() {
     this.isEnabled();
-    this.getBeacons();
     this.createBounceAnimation();
   }
 
@@ -62,6 +62,7 @@ export class HomePage {
       console.log("Bluetooth is " + state);
       this.bluetoothState = state;
       if (this.bluetoothState == "on") {
+        this.getBeacons();
         this.scanForBeacons();
       } else if (this.bluetoothState == "off") {
         this.presentAlert();
@@ -81,39 +82,72 @@ export class HomePage {
     await alert.present();
   }
 
-  //Obtiene un Array con todos lo Beacons de la Base de datos
-  getBeacons() {
-    this.apiMuseum.getBeaconsFromBackEnd().subscribe((res: Array<Beacons>) => {
-      this.beaconArray = res;
-      console.log("GetBeacons: " + this.beaconArray);
-    });
-  }
-
   //Escanea todos los beacons que tiene cerca.
   //Si este esta en la BD muestra la información asociada al mismo.
   async scanForBeacons() {
-    console.log("SCAN...");
-    let scanConfirmed = await this.ble.startScan([]).subscribe((device) => {
-      if (device.name) {
-        console.log(JSON.stringify(device));
+    this.devices = [];
+    let scan = await this.ble.startScan([]).subscribe((device) => {
+      if (scan) {
+        this.onDeviceDiscovered(device);
       }
+    });
+  }
+
+  onDeviceDiscovered(device) {
+    this.ngZone.run(() => {
       for (this.beacon of this.beaconArray) {
         if (this.beacon.mac == device.id) {
           console.log("IDs MATCH");
-          console.log("BEACON FOUND");  
+          console.log("BEACON FOUND");
+          setTimeout(() => {
+            this.increaseBadges();
+            this.bounceAnimation.play();
+          }, 800);
+          let btnNotification = document.getElementById("bounce");
+          btnNotification.addEventListener("click", () => {
+            this.showContent();
+          });
         }
       }
     });
-    if (scanConfirmed) {
-      setTimeout(() => {
-        this.setBadges();
-        this.increaseBadges();
-        this.bounceAnimation.play();
-      }, 2000);
-      let btnNotification = document.getElementById("bounce");
-      btnNotification.addEventListener("click", () => {
-        this.showContent();
-      });
+  }
+
+  // async scanForBeacons() {
+  //   console.log("SCAN...");
+  //   let scanConfirmed = await this.ble.startScan([]).subscribe((device) => {
+  //     if (device.name) {
+  //       console.log(JSON.stringify(device));
+  //     }
+  //     for (this.beacon of this.beaconArray) {
+  //       if (this.beacon.mac == device.id) {
+  //         console.log("IDs MATCH");
+  //         console.log("BEACON FOUND");
+  //       }
+  //     }
+  //   });
+  //   if (scanConfirmed) {
+  //     setTimeout(() => {
+  //       this.setBadges();
+  //       this.increaseBadges();
+  //       this.bounceAnimation.play();
+  //     }, 2000);
+  //     let btnNotification = document.getElementById("bounce");
+  //     btnNotification.addEventListener("click", () => {
+  //       this.showContent();
+  //     });
+  //   }
+  // }
+
+  //CARGAR Y MOSTRAR CONTENIDO
+
+  //Este método muestra el contenido después de haberse cumplido la promesa "scanConfirmed"
+  // y el usuario haber pulsado el botón de las notificaciones.
+  async showContent() {
+    let bounceAwait = this.bounceAnimation.pause();
+    if (bounceAwait) {
+      this.decreaseBadges();
+      this.getExhibitions();
+      this.getArtworks();
     }
   }
 
@@ -124,14 +158,6 @@ export class HomePage {
     try {
       this.badgeNumber = await this.badge.increase(1);
       console.log(this.badgeNumber);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async setBadges() {
-    try {
-      this.badgeNumber = await this.badge.set(0);
     } catch (e) {
       console.log(e);
     }
@@ -183,17 +209,14 @@ export class HomePage {
   //   );
   // }
 
-  //CARGAR Y MOSTRAR CONTENIDO
+  //PETICIONES AL BACKEND
 
-  //Este método muestra el contenido después de haberse cumplido la promesa "scanConfirmed"
-  // y el usuario haber pulsado el botón de las notificaciones.
-  async showContent() {
-    let bounceAwait = this.bounceAnimation.pause();
-    if (bounceAwait) {
-      this.decreaseBadges();
-      this.getExhibitions();
-      this.getArtworks();
-    }
+  //Obtiene un Array con todos lo Beacons de la Base de datos
+  getBeacons() {
+    this.apiMuseum.getBeaconsFromBackEnd().subscribe((res: Array<Beacons>) => {
+      this.beaconArray = res;
+      console.log("GetBeacons: " + this.beaconArray);
+    });
   }
 
   //Obtiene un Array con los datos de la descripción de la exhibición.
@@ -215,6 +238,8 @@ export class HomePage {
         console.log("GetArtworks: " + this.artArray);
       });
   }
+
+  //ELEGIR Y CARGAR ARCHIVOS MULTIMEDIA
 
   //Permite cambiar de Media y reaccionar a lo que esta escogiendo el usuario.
   changeTypeFile(event) {

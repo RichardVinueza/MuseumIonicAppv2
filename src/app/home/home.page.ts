@@ -194,8 +194,6 @@ export class HomePage {
       this.getExhibitions();
       this.getArtworks();
     }
-    
-
   }
 
   //Obtiene un Array con los datos de la descripción de la exhibición.

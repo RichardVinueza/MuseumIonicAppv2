@@ -100,7 +100,7 @@ export class HomePage {
       for (this.beacon of this.beaconArray) {
         if (this.beacon.mac == device.id) {
           console.log("IDs MATCH");
-          console.log("BEACON FOUND");
+          console.log("BEACON FOUND");  
         }
       }
     });

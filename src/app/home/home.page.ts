@@ -47,7 +47,7 @@ export class HomePage {
   ) {}
 
   //Carga todos lo métodos solo cuando la App este lista
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.isEnabled();
     this.getBeacons();
     this.createBounceAnimation();
@@ -189,8 +189,8 @@ export class HomePage {
   // y el usuario haber pulsado el botón de las notificaciones.
   async showContent() {
     let bounceAwait = this.bounceAnimation.pause();
-    if(bounceAwait){
-      this.decreaseBadges(); 
+    if (bounceAwait) {
+      this.decreaseBadges();
       this.getExhibitions();
       this.getArtworks();
     }

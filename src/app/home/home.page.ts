@@ -112,32 +112,6 @@ export class HomePage {
     });
   }
 
-  // async scanForBeacons() {
-  //   console.log("SCAN...");
-  //   let scanConfirmed = await this.ble.startScan([]).subscribe((device) => {
-  //     if (device.name) {
-  //       console.log(JSON.stringify(device));
-  //     }
-  //     for (this.beacon of this.beaconArray) {
-  //       if (this.beacon.mac == device.id) {
-  //         console.log("IDs MATCH");
-  //         console.log("BEACON FOUND");
-  //       }
-  //     }
-  //   });
-  //   if (scanConfirmed) {
-  //     setTimeout(() => {
-  //       this.setBadges();
-  //       this.increaseBadges();
-  //       this.bounceAnimation.play();
-  //     }, 2000);
-  //     let btnNotification = document.getElementById("bounce");
-  //     btnNotification.addEventListener("click", () => {
-  //       this.showContent();
-  //     });
-  //   }
-  // }
-
   //CARGAR Y MOSTRAR CONTENIDO
 
   //Este método muestra el contenido después de haberse cumplido la promesa "scanConfirmed"

@@ -83,7 +83,6 @@ export class HomePage {
   }
 
   //Escanea todos los beacons que tiene cerca.
-  //Si este esta en la BD muestra la información asociada al mismo.
   async scanForBeacons() {
     this.devices = [];
     let scan = await this.ble.startScan([]).subscribe((device) => {
@@ -93,6 +92,9 @@ export class HomePage {
     });
   }
 
+  //Al detectar un beacon confirma que este esta dentro de la BD.
+  //Luego si esto es verdad se incrementa el nº de Badge y se ejecuta la animación Bounce.
+  //Por último, nos permite hacer Click sobre  el ion-fab-button.
   onDeviceDiscovered(device) {
     this.ngZone.run(() => {
       for (this.beacon of this.beaconArray) {

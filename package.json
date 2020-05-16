@@ -28,6 +28,7 @@
     "cordova-android": "^8.1.0",
     "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-ble-central": "^1.2.4",
+    "cordova-sqlite-storage": "^5.0.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
@@ -75,7 +76,8 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-ble-central": {},
-      "cordova-plugin-badge": {}
+      "cordova-plugin-badge": {},
+      "cordova-sqlite-storage": {}
     },
     "platforms": [
       "android"

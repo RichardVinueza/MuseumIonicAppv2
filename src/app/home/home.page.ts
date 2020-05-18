@@ -41,6 +41,7 @@ export class HomePage {
   constructor(
     private apiMuseum: MuseumService,
     private ble: BLE,
+    private storage: Storage,
     private ngZone: NgZone,
     public alertController: AlertController,
     private badge: Badge,
@@ -202,6 +203,11 @@ export class HomePage {
       .subscribe((res: Array<Exhibitions>) => {
         this.exhibitArray = res;
         console.log("GetExhibitions: " + this.exhibitArray);
+
+        this.storage.set("ExhibitionStorage", res);
+        this.storage.get("ExhibitionStorage").then((val) => {
+          console.log("ExhibitionStorage", val);
+        });
       });
   }
 
@@ -212,6 +218,11 @@ export class HomePage {
       .subscribe((res: Array<Artworks>) => {
         this.artArray = res;
         console.log("GetArtworks: " + this.artArray);
+        
+        this.storage.set("ArtworksStorage", res);
+        this.storage.get("ArtworksStorage").then((val) => {
+          console.log("ArtworksStorage", val);
+        });
       });
   }
 

@@ -10,7 +10,7 @@ import { BLE } from "@ionic-native/ble/ngx";
 import { AlertController } from "@ionic/angular";
 import { Badge } from "@ionic-native/badge/ngx";
 import { AnimationController } from "@ionic/angular";
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: "app-home",
   templateUrl: "home.page.html",

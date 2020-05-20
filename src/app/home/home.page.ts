@@ -43,7 +43,7 @@ export class HomePage {
     private ble: BLE,
     private storage: Storage,
     private ngZone: NgZone,
-    public alertController: AlertController,
+    public alertController: AlertController,  
     private badge: Badge,
     private animationCtrl: AnimationController,
     

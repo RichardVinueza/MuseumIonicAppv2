@@ -45,8 +45,9 @@ export class HomePage {
     private ngZone: NgZone,
     public alertController: AlertController,
     private badge: Badge,
-    private animationCtrl: AnimationController
-  ) {}
+    private animationCtrl: AnimationController,
+    
+  ) {} 
 
   //Carga todos lo métodos solo cuando la App este lista
   ionViewDidEnter() {

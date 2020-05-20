@@ -4,7 +4,7 @@
       Museum
     </ion-title>
     <ion-fab>
-      <ion-fab-button id="bounce" (click)="decreaseBadges()">
+      <ion-fab-button id="bounce" value="click">
         <ion-icon name="square-outline"></ion-icon>
         <ion-badge>{{badgeNumber}}</ion-badge>
       </ion-fab-button>
@@ -14,7 +14,7 @@
 
 <ion-content style="display: block" class="padding" [fullscreen]="true">
   <h1 class="titles">Exhibtion</h1>
-  <ion-img class="exhibition" src="http://192.168.0.16:8080/img/icon.png"></ion-img>
+  <ion-img class="exhibition"  src="http://192.168.0.10:8080/img/icon.png"></ion-img>
   <h1 class="titles">Description</h1>
   <ng-container *ngFor="let exhibit of exhibitArray">
     <ng-container *ngIf="exhibit.location == 'Area 1'">

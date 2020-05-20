@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, NgZone } from "@angular/core";
 import {
   MuseumService,
   Exhibitions,
@@ -10,7 +10,7 @@ import { BLE } from "@ionic-native/ble/ngx";
 import { AlertController } from "@ionic/angular";
 import { Badge } from "@ionic-native/badge/ngx";
 import { AnimationController } from "@ionic/angular";
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: "app-home",
   templateUrl: "home.page.html",
@@ -41,14 +41,16 @@ export class HomePage {
   constructor(
     private apiMuseum: MuseumService,
     private ble: BLE,
+    private storage: Storage,
+    private ngZone: NgZone,
     public alertController: AlertController,
     private badge: Badge,
-    private animationCtrl: AnimationController
-  ) {}
+    private animationCtrl: AnimationController,
+    
+  ) {} 
 
   //Carga todos lo métodos solo cuando la App este lista
-  ionViewWillEnter() {
-    this.getBeacons();
+  ionViewDidEnter() {
     this.isEnabled();
     this.createBounceAnimation();
   }
@@ -62,6 +64,7 @@ export class HomePage {
       console.log("Bluetooth is " + state);
       this.bluetoothState = state;
       if (this.bluetoothState == "on") {
+        this.getBeacons();
         this.scanForBeacons();
       } else if (this.bluetoothState == "off") {
         this.presentAlert();
@@ -81,34 +84,48 @@ export class HomePage {
     await alert.present();
   }
 
-  //Obtiene un Array con todos lo Beacons de la Base de datos
-  getBeacons() {
-    this.apiMuseum.getBeaconsFromBackEnd().subscribe((res: Array<Beacons>) => {
-      this.beaconArray = res;
-      console.log("GetBeacons: " + this.beaconArray);
+  //Escanea todos los beacons que tiene cerca.
+  async scanForBeacons() {
+    this.devices = [];
+    let scan = await this.ble.startScan([]).subscribe((device) => {
+      if (scan) {
+        this.onDeviceDiscovered(device);
+      }
     });
   }
 
-  //Escanea todos los beacons que tiene cerca.
-  //Si este esta en la BD muestra la información asociada al mismo.
-  async scanForBeacons() {
-    console.log("SCAN...");
-    let scanConfirmed = await this.ble.startScan([]).subscribe((device) => {
-      if (device.name) {
-        console.log(JSON.stringify(device));
-      }
+  //Al detectar un beacon confirma que este esta dentro de la BD.
+  //Luego si esto es verdad se incrementa el nº de Badge y se ejecuta la animación Bounce.
+  //Por último, nos permite hacer Click sobre  el ion-fab-button.
+  onDeviceDiscovered(device) {
+    this.ngZone.run(() => {
       for (this.beacon of this.beaconArray) {
         if (this.beacon.mac == device.id) {
           console.log("IDs MATCH");
           console.log("BEACON FOUND");
+          setTimeout(() => {
+            this.increaseBadges();
+            this.bounceAnimation.play();
+          }, 800);
+          let btnNotification = document.getElementById("bounce");
+          btnNotification.addEventListener("click", () => {
+            this.showContent();
+          });
         }
       }
     });
-    if (scanConfirmed) {
-      setTimeout(() => {
-        this.increaseBadges();
-        this.bounceAnimation.play();
-      }, 2000);
+  }
+
+  //CARGAR Y MOSTRAR CONTENIDO
+
+  //Este método muestra el contenido después de haberse cumplido la promesa "scanConfirmed"
+  // y el usuario haber pulsado el botón de las notificaciones.
+  async showContent() {
+    let bounceAwait = this.bounceAnimation.pause();
+    if (bounceAwait) {
+      this.decreaseBadges();
+      this.getExhibitions();
+      this.getArtworks();
     }
   }
 
@@ -124,19 +141,10 @@ export class HomePage {
     }
   }
 
-  async setBadges() {
-    try {
-      this.badgeNumber = await this.badge.set(0);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   async decreaseBadges() {
     try {
       this.badgeNumber = await this.badge.decrease(1);
       console.log(this.badgeNumber);
-      this.showContent();
     } catch (e) {
       console.log(e);
     }
@@ -153,15 +161,15 @@ export class HomePage {
       .duration(600)
       .iterations(Infinity)
       .keyframes([
-        { offset: 0, transform: "translateY(0px)" }, 
-        { offset: 0.5, transform: "translateY(-6px)"},
-        { offset: 1, transform: "translateY(0px)"},
+        { offset: 0, transform: "translateY(0px)" },
+        { offset: 0.5, transform: "translateY(-6px)" },
+        { offset: 1, transform: "translateY(0px)" },
       ]);
   }
 
   //2º forma: https://developer.mozilla.org/es/docs/Web/API/Element/animate
   //Igual de válida que la anterior, pero que se ejecuta desde el principio y es menos dinámica.
-  
+
   // playBounceAnimation() {
   //   console.log("BOUNCE ANIMATION");
   //   this.bounceAnimation = document.getElementById("bounce").animate(
@@ -179,16 +187,14 @@ export class HomePage {
   //   );
   // }
 
-  //CARGAR Y MOSTRAR CONTENIDO
+  //PETICIONES AL BACKEND
 
-  //Este método muestra el contenido después de haberse cumplido la promesa "scanConfirmed"
-  // y el usuario haber pulsado el botón de las notificaciones.
-  showContent() {
-    if (this.badgeNumber == 0) {
-      this.bounceAnimation.pause();
-      this.getExhibitions();
-      this.getArtworks();
-    }
+  //Obtiene un Array con todos lo Beacons de la Base de datos
+  getBeacons() {
+    this.apiMuseum.getBeaconsFromBackEnd().subscribe((res: Array<Beacons>) => {
+      this.beaconArray = res;
+      console.log("GetBeacons: " + this.beaconArray);
+    });
   }
 
   //Obtiene un Array con los datos de la descripción de la exhibición.
@@ -198,6 +204,11 @@ export class HomePage {
       .subscribe((res: Array<Exhibitions>) => {
         this.exhibitArray = res;
         console.log("GetExhibitions: " + this.exhibitArray);
+
+        this.storage.set("ExhibitionStorage", res);
+        this.storage.get("ExhibitionStorage").then((val) => {
+          console.log("ExhibitionStorage", val);
+        });
       });
   }
 
@@ -208,8 +219,15 @@ export class HomePage {
       .subscribe((res: Array<Artworks>) => {
         this.artArray = res;
         console.log("GetArtworks: " + this.artArray);
+        
+        this.storage.set("ArtworksStorage", res);
+        this.storage.get("ArtworksStorage").then((val) => {
+          console.log("ArtworksStorage", val);
+        });
       });
   }
+
+  //ELEGIR Y CARGAR ARCHIVOS MULTIMEDIA
 
   //Permite cambiar de Media y reaccionar a lo que esta escogiendo el usuario.
   changeTypeFile(event) {

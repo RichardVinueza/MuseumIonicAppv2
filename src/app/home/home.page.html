@@ -14,24 +14,28 @@
 
 <ion-content style="display: block" class="padding" [fullscreen]="true">
   <h1 class="titles">Exhibtion</h1>
-  <ion-img class="exhibition"  src="http://192.168.0.10:8080/img/icon.png"></ion-img>
+  <ion-img class="exhibition" src="http://192.168.0.10:8080/img/icon.png"></ion-img>
   <h1 class="titles">Description</h1>
   <ng-container *ngFor="let exhibit of exhibitArray">
-    <ng-container *ngIf="exhibit.location == 'Area 1'">
-      <ion-list id="load-exhibit" lines="none">
-        <ion-item class="descrip">
-          <ion-label>Name: {{exhibit.name}}</ion-label>
-        </ion-item>
-        <ion-item class="descrip">
-          <ion-label>Opening Date: {{exhibit.openingDate}}</ion-label>
-        </ion-item>
-        <ion-item class="descrip">
-          <ion-label>Closing Date: {{exhibit.closingDate}}</ion-label>
-        </ion-item>
-        <ion-item class="descrip">
-          <ion-label>Location: {{exhibit.location}}</ion-label>
-        </ion-item>
-      </ion-list>
+    <ng-container *ngFor="let beacon of beaconArray">
+      <ng-container *ngFor="let deviceFound of devices" >
+        <ng-container *ngIf="beacon.id == exhibit.id && beacon.mac == deviceFound.id">
+          <ion-list id="load-exhibit" lines="none">
+            <ion-item class="descrip">
+              <ion-label>Name: {{exhibit.name}}</ion-label>
+            </ion-item>
+            <ion-item class="descrip">
+              <ion-label>Opening Date: {{exhibit.openingDate}}</ion-label>
+            </ion-item>
+            <ion-item class="descrip">
+              <ion-label>Closing Date: {{exhibit.closingDate}}</ion-label>
+            </ion-item>
+            <ion-item class="descrip">
+              <ion-label>Location: {{exhibit.location}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ng-container>
+      </ng-container>
     </ng-container>
   </ng-container>
   <h1 class="titles">Artworks</h1>
@@ -75,6 +79,9 @@
         </ion-item>
         <ion-item class="descrip">
           <ion-label>COUNTRY: {{beacon.artwork.country}}</ion-label>
+        </ion-item>
+        <ion-item class="descrip">
+          <ion-label>ID: {{beacon.artwork.id}}</ion-label>
         </ion-item>
       </ng-container>
     </ng-container>

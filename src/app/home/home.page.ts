@@ -23,8 +23,8 @@ export class HomePage {
   bounceAnimation: any;
 
   devices: any[] = [];
+  deviceFound: any;
   beaconArray: Array<Beacons> = [];
-  auxDevice: any;
   beacon: Beacons;
   bluetoothState: string;
 
@@ -103,6 +103,7 @@ export class HomePage {
         if (this.beacon.mac == device.id) {
           console.log("IDs MATCH");
           console.log("BEACON FOUND");
+          this.deviceFound = this.devices.push(device);
           setTimeout(() => {
             this.increaseBadges();
             this.bounceAnimation.play();

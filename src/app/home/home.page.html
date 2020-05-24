@@ -54,7 +54,7 @@
   <ion-list *ngFor="let art of artArrayShow" lines="none">
     <ng-container *ngFor="let beacon of beaconArray">
       <ng-container *ngFor="let deviceFound of devices">
-        <ng-container *ngIf="art.id == beacon.id && beacon.mac == deviceFound.id">
+        <ng-container *ngIf="beacon.artwork.id == art.id && beacon.mac == deviceFound.id">
           <h1 class="artworks">{{art.name}}</h1>
           <ng-container *ngFor="let media of art.media">
             <ion-img *ngIf="media.fileType == 'image' && typeFileChoices.includes(media.fileType)" style="display:block"

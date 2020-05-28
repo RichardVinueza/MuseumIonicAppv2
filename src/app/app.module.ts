@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BLE } from '@ionic-native/ble/ngx';
 import { Badge } from '@ionic-native/badge/ngx';
 import { IonicStorageModule } from '@ionic/storage';
+import { Media} from '@ionic-native/media/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,6 +29,7 @@ import { IonicStorageModule } from '@ionic/storage';
     SplashScreen,
     BLE,
     Badge,
+    Media,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

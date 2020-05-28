@@ -11,6 +11,7 @@ import { AlertController } from "@ionic/angular";
 import { Badge } from "@ionic-native/badge/ngx";
 import { AnimationController } from "@ionic/angular";
 import { Storage } from '@ionic/storage';
+import { Media, MediaObject } from '@ionic-native/media/ngx';
 @Component({
   selector: "app-home",
   templateUrl: "home.page.html",

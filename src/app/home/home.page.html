@@ -51,6 +51,37 @@
     </ion-item>
   </ion-list>
 
+  <ion-list *ngFor="let art of artArray" lines="none">
+    <ng-container *ngFor="let beacon of beaconArray">
+      <ng-container *ngFor="let deviceFound of devices">
+        <ng-container *ngIf="beacon.artwork.id == art.id && beacon.mac == deviceFound.id">
+          <ng-container *ngFor="let media of art.media">
+            <ng-container *ngIf="typeFileChoices == ' ' || (typeFileChoices != 'audio' && typeFileChoices != 'video')">
+              <h1 *ngIf="media.fileType == 'image'" class="artworks">{{art.name}}</h1>
+              <ion-img *ngIf="media.fileType == 'image'" style="display:block" class="media"
+                [src]="ipAddress + '/img/' + media.fileName + '.' + media.extension" alt="img">
+              </ion-img>
+            </ng-container>
+            <ng-container *ngIf="typeFileChoices == ' ' || (typeFileChoices != 'image' && typeFileChoices != 'video')">
+              <h1 *ngIf="media.fileType == 'audio'" class="artworks">{{art.name}}</h1>
+              <audio *ngIf="media.fileType == 'audio'" style="display:block" class="media" controls>
+                <source [src]="ipAddress + '/audio/' + media.fileName + '.' + media.extension" type="audio/mpeg"
+                  alt="audio">
+              </audio>
+            </ng-container>
+            <ng-container *ngIf="typeFileChoices == ' ' || (typeFileChoices != 'audio' && typeFileChoices != 'image')">
+              <h1 *ngIf="media.fileType == 'video'" class="artworks">{{art.name}}</h1>
+              <video *ngIf="media.fileType == 'video'" style="display:block" class="media" controls>
+                <source [src]="ipAddress + '/video/' + media.fileName + '.' + media.extension" alt="video">
+              </video>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ion-list>
+
+  <!-- 
   <ion-list *ngFor="let art of artArrayShow" lines="none">
     <ng-container *ngFor="let beacon of beaconArray">
       <ng-container *ngFor="let deviceFound of devices">
@@ -73,7 +104,7 @@
         </ng-container>
       </ng-container>
     </ng-container>
-  </ion-list>
+  </ion-list> -->
 
   <!-- <ion-list lines="none">
     <ng-container *ngFor="let beacon of beaconArray">

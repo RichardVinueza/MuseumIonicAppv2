@@ -230,33 +230,43 @@ export class HomePage {
 
   //ELEGIR Y CARGAR ARCHIVOS MULTIMEDIA
 
-  //Permite cambiar de Media y reaccionar a lo que esta escogiendo el usuario.
+    //Permite cambiar de Media y reaccionar a lo que esta escogiendo el usuario.
   changeTypeFile(event) {
     let fileChoice: [String] = event.detail.value;
     if (fileChoice == []) {
       this.typeFileChoices = ["image"];
       this.typeFileChoices = ["audio"];
       this.typeFileChoices = ["video"];
-      this.artArrayShow = this.artArray;
-    } else {
-      this.loadArtWorkShow(fileChoice);
-    }
+    } 
   }
 
-  //Una vez el usuario escoge Media, este método la carga en la pantalla.
-  loadArtWorkShow(fileChoice: [String]) {
-    this.artArrayShow = new Array<Artworks>();
-    for (let art of this.artArray) {
-      let mediaShow = false;
-      for (let media of art.media) {
-        if (fileChoice.includes(media.fileType)) {
-          mediaShow = true;
-        }
-      }
-      if (mediaShow == true) {
-        this.artArrayShow.push(art);
-      }
-    }
-    console.log(this.artArrayShow);
-  }
+  // //Permite cambiar de Media y reaccionar a lo que esta escogiendo el usuario.
+  // changeTypeFile(event) {
+  //   let fileChoice: [String] = event.detail.value;
+  //   if (fileChoice == []) {
+  //     this.typeFileChoices = ["image"];
+  //     this.typeFileChoices = ["audio"];
+  //     this.typeFileChoices = ["video"];
+  //     this.artArrayShow = this.artArray;
+  //   } else {
+  //     this.loadArtWorkShow(fileChoice);
+  //   }
+  // }
+
+  // //Una vez el usuario escoge Media, este método la carga en la pantalla.
+  // loadArtWorkShow(fileChoice: [String]) {
+  //   this.artArrayShow = new Array<Artworks>();
+  //   for (let art of this.artArray) {
+  //     let mediaShow = false;
+  //     for (let media of art.media) {
+  //       if (fileChoice.includes(media.fileType)) {
+  //         mediaShow = true;
+  //       }
+  //     }
+  //     if (mediaShow == true) {
+  //       this.artArrayShow.push(art);
+  //     }
+  //   }
+  //   console.log(this.artArrayShow);
+  // }
 }

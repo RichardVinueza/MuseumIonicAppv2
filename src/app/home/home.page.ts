@@ -19,6 +19,7 @@ import { Media, MediaObject } from '@ionic-native/media/ngx';
 })
 export class HomePage {
   ipAddress = ipAddress;
+  notifacation:MediaObject;
 
   badgeNumber: number;
   bounceAnimation: any;
@@ -47,6 +48,7 @@ export class HomePage {
     public alertController: AlertController,  
     private badge: Badge,
     private animationCtrl: AnimationController,
+    private media: Media
     
   ) {} 
 
@@ -107,10 +109,12 @@ export class HomePage {
           this.deviceFound = this.devices.push(device);
           setTimeout(() => {
             this.increaseBadges();
+            this.notifacation = this.media.create("http://192.168.0.10:8080/audio/notification.mp3");
+            this.notifacation.play();
             this.bounceAnimation.play();
           }, 800);
           let btnNotification = document.getElementById("bounce");
-          btnNotification.addEventListener("click", () => {
+          btnNotification.addEventListener("click", () => { 
             this.showContent();
           });
         }

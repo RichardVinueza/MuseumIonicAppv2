@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-splash',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SplashPage implements OnInit {
 
-  constructor() { }
+  splash = true;
+
+  constructor(private route: Router) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.splash = false; 
+    }, 4000);
+    setTimeout(() => {
+      this.route.navigate(['/home']);
+    }, 3000);
+   
   }
 
 }

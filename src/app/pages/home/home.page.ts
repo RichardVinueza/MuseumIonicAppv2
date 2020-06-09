@@ -5,7 +5,7 @@ import {
   Artworks,
   ipAddress,
   Beacons,
-} from "../services/museum.service";
+} from "../../services/museum.service";
 import { BLE } from "@ionic-native/ble/ngx";
 import { AlertController } from "@ionic/angular";
 import { Badge } from "@ionic-native/badge/ngx";

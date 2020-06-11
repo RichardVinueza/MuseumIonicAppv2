@@ -60,8 +60,9 @@ export class HomePage {
 
   //ESTADO DE BLUETOOH Y DETECCIÓN DE BEACONS
 
-  //Revisa si Bluetooth esta activado. Si es así escanea el Beacon.
-  //En caso contratio saldrá un Alert pidiendo al usuario que lo active.
+  //Comprueba si el Bluetooth esta activado.
+  //Si el estado es OFF saltará un aler.
+  //Si el estado es ON comenzará a escanear.
   isEnabled() {
     this.ble.startStateNotifications().subscribe((state) => {
       console.log("Bluetooth is " + state);
@@ -75,7 +76,7 @@ export class HomePage {
     });
   }
 
-  //Lanza un Alert con el mensaje escrito.
+  //Lanza un Alert si bluettothState == "off"
   async presentAlert() {
     const alert = await this.alertController.create({
       header: "Alert",
@@ -97,9 +98,13 @@ export class HomePage {
     });
   }
 
-  //Al detectar un beacon confirma que este esta dentro de la BD.
-  //Luego si esto es verdad se incrementa el nº de Badge y se ejecuta la animación Bounce.
-  //Por último, nos permite hacer Click sobre  el ion-fab-button.
+  /*
+    Confirma la existencia del Beacon en la BD.
+    Si esta en la BD se incrementa el nº de Badge.
+    Se ejecuta la animación Bounce.
+    Se escucha el aviso de notificación.
+    Click sobre fab-button para mostrar datos.
+  */
   onDeviceDiscovered(device) {
     this.ngZone.run(() => {
       for (this.beacon of this.beaconArray) {
@@ -124,10 +129,11 @@ export class HomePage {
 
   //CARGAR Y MOSTRAR CONTENIDO
 
-  //Este método muestra el contenido después de haberse cumplido la promesa "scanConfirmed"
-  // y el usuario haber pulsado el botón de las notificaciones.
+  /*
+  Este método muestra el contenido
+  */
   async showContent() {
-    let bounceAwait = this.bounceAnimation.pause();
+    let bounceAwait = await this.bounceAnimation.pause();
     if (bounceAwait) {
       this.decreaseBadges();
       this.getExhibitions();
@@ -137,7 +143,7 @@ export class HomePage {
 
   //NOTIFICACIONES Y ANIMACIONES
 
-  //Métodos que en principio nos sirven para mostrar las notificaciones tras haber detectado un beacon.
+  //Métodos que incrementan o decrementan el valor de ion-badge.
   async increaseBadges() {
     try {
       this.badgeNumber = await this.badge.increase(1);
@@ -158,8 +164,12 @@ export class HomePage {
 
   //Dos formas de crear una animación de rebote al recibir una notioficación.
 
-  // 1º forma:  https://ionicframework.com/docs/utilities/animations
-  //Esta forma es mejor ya que primero solo se crea la animación y luego decidimos utilizarla donde y cuando corresponda.
+  /*
+    1º forma:  https://ionicframework.com/docs/utilities/animations
+
+    Esta forma es mejor ya que primero solo se crea la animación.
+    Luego decidimos utilizarla donde y cuando corresponda.
+  */
   createBounceAnimation() {
     this.bounceAnimation = this.animationCtrl
       .create()
@@ -193,7 +203,7 @@ export class HomePage {
   //   );
   // }
 
-  //PETICIONES AL BACKEND
+  //INTERACCIONES CON EL SERVICIO
 
   //Obtiene un Array con todos lo Beacons de la Base de datos
   getBeacons() {
@@ -235,7 +245,7 @@ export class HomePage {
 
   //ELEGIR Y CARGAR ARCHIVOS MULTIMEDIA
 
-    //Permite cambiar de Media y reaccionar a lo que esta escogiendo el usuario.
+  //Permite cambiar Y filtrar los archivos multimedia.
   changeTypeFile(event) {
     let fileChoice: [String] = event.detail.value;
     if (fileChoice == []) {
